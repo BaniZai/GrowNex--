@@ -186,39 +186,8 @@
   --shadow-lift: 0 1px 2px rgb(var(--ink-rgb) / 0.05), 0 22px 40px -18px rgb(var(--ink-rgb) / 0.3);
 }
 
-:root,
-[data-theme='sun'] {
-  --ink: #16161a;
-  --ink-rgb: 22 22 26;
-  --ink-600: #2a2a31;
-  --ink-soft: #5c5a57;
-  --ink-mute: #8f8b85;
-  --deep: #1c1c21;
-  --accent: #ff5a1f;
-  --accent-rgb: 255 90 31;
-  --accent-600: #e8480c;
-  --accent-700: #a33a0c;
-  --accent-50: #fff1e9;
-  --accent-100: #ffd9c5;
-  --accent-glow: #ff7a3d;
-  --grad-1: #ff7a1a;
-  --grad-2: #ff4d2e;
-  --grad-3: #ff3d6e;
-  --on-grad: #16161a;
-  --cream: #f7f5f2;
-  --panel: #f2efea;
-  --panel2: #ebe7e1;
-  --dash: #cfc9c0;
-  --line: #e8e4de;
-  --stage-1: #f1ece4;
-  --stage-2: #e6dccf;
-  --stage-3: #d9d2c7;
-  --frame-1: #f5f2ed;
-  --frame-2: #f7f4ef;
-  --frame-3: #ffeadd;
-}
-
-[data-theme='volt'] {
+/* 品牌主题:电光紫 */
+:root {
   --ink: #15131f;
   --ink-rgb: 21 19 31;
   --ink-600: #2b2840;
@@ -236,79 +205,17 @@
   --grad-2: #6a4dff;
   --grad-3: #3f7bff;
   --on-grad: #ffffff;
-  --cream: #f6f5fb;
-  --panel: #f0eef9;
-  --panel2: #e6e3f3;
-  --dash: #c8c3e0;
-  --line: #e4e1f1;
-  --stage-1: #ebe8f7;
-  --stage-2: #d9d3f0;
-  --stage-3: #cfcae6;
-  --frame-1: #f3f2fa;
-  --frame-2: #f6f5fc;
-  --frame-3: #e8e2ff;
-}
-
-[data-theme='sky'] {
-  --ink: #14202e;
-  --ink-rgb: 20 32 46;
-  --ink-600: #243447;
-  --ink-soft: #54657a;
-  --ink-mute: #8797a9;
-  --deep: #162536;
-  --accent: #2f8cf0;
-  --accent-rgb: 47 140 240;
-  --accent-600: #1f78dc;
-  --accent-700: #1a5fb0;
-  --accent-50: #eaf4ff;
-  --accent-100: #cfe4fb;
-  --accent-glow: #8cc8ff;
-  --grad-1: #5bb6ff;
-  --grad-2: #2f8cf0;
-  --grad-3: #4a6fe8;
-  --on-grad: #ffffff;
-  --cream: #f4f8fc;
-  --panel: #edf3fa;
-  --panel2: #e1eaf4;
-  --dash: #c3d1e2;
-  --line: #dde7f2;
-  --stage-1: #e7f0fa;
-  --stage-2: #d4e4f6;
-  --stage-3: #c6d9ee;
-  --frame-1: #f1f6fb;
-  --frame-2: #f5f9fd;
-  --frame-3: #dcecfd;
-}
-
-[data-theme='forest'] {
-  --ink: #10201a;
-  --ink-rgb: 16 32 26;
-  --ink-600: #1f362d;
-  --ink-soft: #4d5f56;
-  --ink-mute: #86938b;
-  --deep: #12251d;
-  --accent: #1f9460;
-  --accent-rgb: 31 148 96;
-  --accent-600: #187a4e;
-  --accent-700: #135c3b;
-  --accent-50: #e9f5ee;
-  --accent-100: #cbe8d8;
-  --accent-glow: #5fd49b;
-  --grad-1: #3fbf86;
-  --grad-2: #1f9460;
-  --grad-3: #0f6e57;
-  --on-grad: #ffffff;
-  --cream: #f4f7f3;
-  --panel: #eef2ec;
-  --panel2: #e2e9e0;
-  --dash: #c2cdc0;
-  --line: #dde5db;
-  --stage-1: #e8eee6;
-  --stage-2: #d3dfd1;
-  --stage-3: #c8d4c6;
-  --frame-1: #f1f5ef;
-  --frame-2: #f4f7f2;
-  --frame-3: #dff0e5;
+  --cream: #f3f0fd;
+  --panel: #ece8fa;
+  --panel2: #e1dcf5;
+  --dash: #c4bde6;
+  --line: #e0dbf3;
+  --stage-1: #e4def8;
+  --stage-2: #cfc6ef;
+  --stage-3: #c3b9e8;
+  --frame-1: #ece8fb;
+  --frame-2: #f1eefc;
+  --frame-3: #ddd3ff;
 }
 
 @layer base {
@@ -346,8 +253,9 @@
 
 .frame-bg {
   background:
-    radial-gradient(640px 380px at 100% 100%, rgb(var(--accent-rgb) / 0.2) 0%, transparent 70%),
-    radial-gradient(520px 320px at 0% 0%, rgb(255 255 255 / 0.9) 0%, transparent 70%),
+    radial-gradient(700px 420px at 100% 100%, rgb(var(--accent-rgb) / 0.22) 0%, transparent 70%),
+    radial-gradient(560px 360px at 0% 0%, rgb(63 123 255 / 0.12) 0%, transparent 70%),
+    radial-gradient(520px 320px at 55% 0%, rgb(255 255 255 / 0.55) 0%, transparent 70%),
     linear-gradient(125deg, var(--frame-1) 0%, var(--frame-2) 55%, var(--frame-3) 100%);
 }
 

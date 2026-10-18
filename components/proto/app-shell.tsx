@@ -190,48 +190,6 @@ function AvatarMenu() {
   )
 }
 
-const THEMES = [
-  { id: 'volt', label: '电光紫', swatch: 'linear-gradient(135deg,#8b6bff,#3f7bff)' },
-  { id: 'sky', label: '淡蓝', swatch: 'linear-gradient(135deg,#5bb6ff,#2f8cf0)' },
-  { id: 'forest', label: '森林绿', swatch: 'linear-gradient(135deg,#3fbf86,#0f6e57)' },
-  { id: 'sun', label: '活力橙', swatch: 'linear-gradient(135deg,#ff7a1a,#ff3d6e)' },
-] as const
-
-type ThemeId = (typeof THEMES)[number]['id']
-
-function ThemeSwitch() {
-  const [theme, setTheme] = useState<ThemeId>('volt')
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme
-  }, [theme])
-
-  return (
-    <div role="radiogroup" aria-label="配色主题" className="flex h-10 items-center gap-1 rounded-full bg-white/80 px-1.5">
-      {THEMES.map((t) => {
-        const on = theme === t.id
-        return (
-          <button
-            key={t.id}
-            type="button"
-            role="radio"
-            aria-checked={on}
-            aria-label={t.label}
-            title={t.label}
-            onClick={() => setTheme(t.id)}
-            className={cn(
-              'grid size-7 place-items-center rounded-full transition-all duration-200',
-              on ? 'bg-ink/10 ring-2 ring-ink' : 'hover:scale-110',
-            )}
-          >
-            <span className="size-4 rounded-full" style={{ background: t.swatch }} />
-          </button>
-        )
-      })}
-    </div>
-  )
-}
-
 function TopBar() {
   const { screen, go } = useStore()
   return (
@@ -263,7 +221,6 @@ function TopBar() {
           私有化模式
           <span className="size-1.5 rounded-full bg-[#25a56a]" />
         </div>
-        <ThemeSwitch />
         <RecentsMenu />
         <button
           type="button"

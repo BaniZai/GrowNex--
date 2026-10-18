@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#e9e5de',
+  themeColor: '#e6e0fa',
 }
 
 export default function RootLayout({
@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="zh-CN" data-theme="volt" suppressHydrationWarning className={`${jakarta.variable} ${noto.variable}`}>
+    <html lang="zh-CN" suppressHydrationWarning className={`${jakarta.variable} ${noto.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   )
