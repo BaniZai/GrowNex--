@@ -1,36 +1,45 @@
 'use client'
 
-import { ArrowDown, ArrowUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { formatTokens, useTokens } from './tokens'
 
 export function TokenTicker() {
   const { today, rate, active, openPanel } = useTokens()
+  const total = today.input + today.output
+  const perSecond = rate.input + rate.output
 
   return (
     <button
       type="button"
       onClick={openPanel}
       aria-haspopup="dialog"
-      aria-label={`今日 Token 用量,输入 ${today.input},输出 ${today.output},点击查看详情`}
+      aria-label={`今日 Token 用量 ${total},输入 ${today.input},输出 ${today.output},点击查看详情`}
       title={
         active
           ? `生成中 · 输入 ${rate.input} tok/s · 输出 ${rate.output} tok/s`
-          : '今日 Token 用量 · 点击查看详情'
+          : `今日 Token · 输入 ${formatTokens(today.input)} · 输出 ${formatTokens(today.output)}`
       }
-      className={cn(
-        'hidden h-10 items-center gap-3 rounded-full px-3.5 text-[12px] font-medium transition-colors lg:flex',
-        active ? 'bg-white text-ink shadow-[0_0_0_1px_rgb(var(--ink-rgb)/0.08)]' : 'bg-white/80 text-ink-soft hover:bg-white hover:text-ink',
-      )}
+      className="group hidden h-10 items-center gap-2 rounded-full px-3 text-[12px] text-ink-soft transition-colors hover:bg-white/80 hover:text-ink lg:flex"
     >
-      <span className="flex items-center gap-1">
-        <ArrowUp aria-hidden className={cn('size-3.5', active ? 'tok-up text-brand' : 'text-ink-mute')} />
-        <span className="min-w-[46px] text-right tabular-nums">{formatTokens(today.input)}</span>
+      <span aria-hidden className="relative grid size-2 place-items-center">
+        <span
+          className={cn(
+            'size-1.5 rounded-full transition-colors duration-500',
+            active ? 'bg-[#25a56a]' : 'bg-ink-mute/60 group-hover:bg-ink-mute',
+          )}
+        />
+        {active && <span className="tok-breathe absolute inset-0 rounded-full bg-[#25a56a]/40" />}
       </span>
-      <span aria-hidden className="h-4 w-px bg-line" />
-      <span className="flex items-center gap-1">
-        <ArrowDown aria-hidden className={cn('size-3.5', active ? 'tok-down text-ink' : 'text-ink-mute')} />
-        <span className="min-w-[40px] text-right tabular-nums">{formatTokens(today.output)}</span>
+      <span className="font-medium">今日</span>
+      <span className="min-w-[44px] text-left font-medium tabular-nums text-ink">{formatTokens(total)}</span>
+      <span
+        aria-hidden
+        className={cn(
+          'overflow-hidden whitespace-nowrap tabular-nums text-ink-mute transition-all duration-500',
+          active ? 'max-w-[72px] opacity-100' : 'max-w-0 opacity-0',
+        )}
+      >
+        {formatTokens(perSecond)}/s
       </span>
       <span className="sr-only" aria-live="off">
         {active ? '正在统计' : ''}
