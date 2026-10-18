@@ -292,7 +292,23 @@
   100% { box-shadow: 0 0 0 10px rgb(var(--accent-rgb) / 0); }
 }
 
+@keyframes tok-up {
+  0% { transform: translateY(3px); opacity: 0.35; }
+  60% { opacity: 1; }
+  100% { transform: translateY(-3px); opacity: 0.35; }
+}
+
+@keyframes tok-down {
+  0% { transform: translateY(-3px); opacity: 0.35; }
+  60% { opacity: 1; }
+  100% { transform: translateY(3px); opacity: 0.35; }
+}
+
+.tok-up { animation: tok-up 0.8s ease-in-out infinite; }
+.tok-down { animation: tok-down 0.8s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
+  .tok-up, .tok-down { animation: none; }
   .lift { transition: none; }
   .lift:hover { transform: none; }
 }

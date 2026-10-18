@@ -17,11 +17,13 @@ import {
 import { cn } from '@/lib/utils'
 import { Btn, Card, CardHeader, FlagTag, Notice, PageHeader, PillTabs, SectionLabel, Tag } from '../ui'
 import { useStore } from '../store'
+import { useTokens } from '../tokens'
 
 type Mode = 'result' | 'input' | 'unsupported' | 'inbox'
 
 export function PolicyScreen() {
   const { go } = useStore()
+  const { stream } = useTokens()
   const [mode, setMode] = useState<Mode>('result')
   const [text, setText] = useState('')
   const [status, setStatus] = useState('')
@@ -82,7 +84,12 @@ export function PolicyScreen() {
                 />
               </div>
               <div className="flex justify-end">
-                <Btn variant="primary" className="h-11 px-6" disabled={text.trim().length === 0} onClick={() => setMode('result')}>
+                <Btn variant="primary" className="h-11 px-6" disabled={text.trim().length === 0}
+                  onClick={() => {
+                    setMode('result')
+                    stream('制度', '制度通知解读')
+                  }}
+                >
                   开始解读
                 </Btn>
               </div>

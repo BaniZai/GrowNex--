@@ -31,6 +31,7 @@ import {
   Toast,
 } from '../ui'
 import { useStore } from '../store'
+import { useTokens } from '../tokens'
 
 type Phase = 'ready' | 'running' | 'cancelling' | 'cancelled' | 'review'
 type Db = 'Oracle' | 'MySQL' | 'PostgreSQL'
@@ -65,6 +66,7 @@ const STAGES = ['规则匹配', '标准库比对', '候选整理', '写入待审
 
 export function GenerateScreen() {
   const { go, datasets } = useStore()
+  const { stream } = useTokens()
   const [phase, setPhase] = useState<Phase>('ready')
   const [step, setStep] = useState(0)
   const [done, setDone] = useState(0)
@@ -168,7 +170,10 @@ export function GenerateScreen() {
                 <li><Tag tone="gray">标准库 · 2,018 条</Tag></li>
               </ul>
             </div>
-            <Btn variant="primary" className="h-12 px-8 text-[14px]" disabled={noDataset} onClick={() => setPhase('running')}>
+            <Btn variant="primary" className="h-12 px-8 text-[14px]" disabled={noDataset} onClick={() => {
+                  setPhase('running')
+                  stream('治理', '生成注释建议', 6000)
+                }}>
               <Sparkles className="size-4" />
               {phase === 'cancelled' ? '重新生成建议' : '开始生成建议'}
             </Btn>

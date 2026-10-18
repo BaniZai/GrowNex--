@@ -1,10 +1,13 @@
 'use client'
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Bell, ChevronLeft, ChevronRight, Clock3, WifiOff } from 'lucide-react'
+import { Activity, Bell, ChevronLeft, ChevronRight, Clock3, WifiOff } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ModalRootContext } from './ui'
 import { SCREENS, useStore, type ScreenId } from './store'
+import { compactTokens, useTokens } from './tokens'
+import { TokenTicker } from './token-ticker'
+import { TokenPanel } from './token-panel'
 
 type NavItem = {
   label: string
@@ -124,6 +127,7 @@ function RecentsMenu() {
 
 function AvatarMenu() {
   const { screen, go } = useStore()
+  const { today, active, openPanel } = useTokens()
   const [open, setOpen] = useState(false)
   const box = useRef<HTMLDivElement>(null)
 
@@ -184,6 +188,24 @@ function AvatarMenu() {
             <span className="text-[13px] font-medium text-ink">模型设置</span>
             <span className="text-xs text-ink-mute">当前为本地规则模式</span>
           </button>
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setOpen(false)
+              openPanel()
+            }}
+            className="flex w-full flex-col rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-brand-50"
+          >
+            <span className="flex items-center gap-1.5 text-[13px] font-medium text-ink">
+              <Activity aria-hidden className="size-3.5" />
+              Token 用量
+              {active ? <span aria-hidden className="size-1.5 animate-pulse rounded-full bg-sun" /> : null}
+            </span>
+            <span className="text-xs tabular-nums text-ink-mute">
+              今日 {compactTokens(today.input + today.output)} · 输入 {compactTokens(today.input)} · 输出 {compactTokens(today.output)}
+            </span>
+          </button>
         </div>
       )}
     </div>
@@ -221,6 +243,7 @@ function TopBar() {
           私有化模式
           <span className="size-1.5 rounded-full bg-[#25a56a]" />
         </div>
+        <TokenTicker />
         <RecentsMenu />
         <button
           type="button"
@@ -313,6 +336,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           >
             {children}
           </main>
+          <TokenPanel />
         </ModalRootContext.Provider>
       </div>
       <Switcher />

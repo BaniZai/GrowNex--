@@ -2,6 +2,7 @@
 
 import { AppShell } from './app-shell'
 import { StoreProvider, useStore } from './store'
+import { TokenProvider } from './tokens'
 import { HomeScreen } from './screens/s01-home'
 import { ImportScreen } from './screens/s02-import'
 import { ListScreen } from './screens/s03-list'
@@ -32,9 +33,11 @@ function Current() {
 export function Prototype() {
   return (
     <StoreProvider>
-      <AppShell>
-        <Current />
-      </AppShell>
+      <TokenProvider>
+        <AppShell>
+          <Current />
+        </AppShell>
+      </TokenProvider>
     </StoreProvider>
   )
 }

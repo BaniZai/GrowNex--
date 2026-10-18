@@ -28,6 +28,7 @@ import {
   type Tone,
 } from '../ui'
 import { useStore } from '../store'
+import { useTokens } from '../tokens'
 
 type Cand = {
   id: string
@@ -54,6 +55,7 @@ const STEPS = ['描述目标', '找数据', '分析需求', '确认口径', '代
 
 export function DevFindScreen() {
   const { go, datasets, devSourceId, setDevSourceId, devInvalidated, ackDevInvalidated } = useStore()
+  const { stream } = useTokens()
   const [goal, setGoal] = useState('统计每个月末各支行的个人客户贷款余额,用于经营分析月报。')
   const [output, setOutput] = useState('按月、支行汇总的贷款余额表')
   const [db, setDb] = useState('Oracle')
@@ -162,7 +164,10 @@ export function DevFindScreen() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <Btn variant="primary" className="h-10" disabled={noSource} onClick={() => setSearched(true)}>
+                <Btn variant="primary" className="h-10" disabled={noSource} onClick={() => {
+                    setSearched(true)
+                    stream('开发', '检索相关表与字段')
+                  }}>
                   <Search className="size-4" />
                   在所选范围检索
                 </Btn>
@@ -264,7 +269,10 @@ export function DevFindScreen() {
             />
             <div className="flex flex-col gap-4 p-6 pt-4">
               {!analysed ? (
-                <Btn variant="primary" onClick={() => setAnalysed(true)}>开始分析</Btn>
+                <Btn variant="primary" onClick={() => {
+                    setAnalysed(true)
+                    stream('开发', '分析需求与数据')
+                  }}>开始分析</Btn>
               ) : (
                 <>
                   <div>
