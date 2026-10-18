@@ -19,7 +19,6 @@ const NAV: NavItem[] = [
   { label: '数据开发', target: 7, match: [7, 8], badge: 1 },
   { label: '制度解读', target: 9, match: [9] },
   { label: '标准库', target: 6, match: [6] },
-  { label: '模型设置', target: 10, match: [10] },
 ]
 
 const statusDot: Record<string, string> = {
@@ -123,6 +122,74 @@ function RecentsMenu() {
   )
 }
 
+function AvatarMenu() {
+  const { screen, go } = useStore()
+  const [open, setOpen] = useState(false)
+  const box = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onDown = (e: MouseEvent) => {
+      if (!box.current?.contains(e.target as Node)) setOpen(false)
+    }
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    document.addEventListener('mousedown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  const onSettings = screen === 10
+
+  return (
+    <div ref={box} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-haspopup="menu"
+        aria-label="个人菜单"
+        className={cn(
+          'grid size-10 place-items-center rounded-full bg-ink text-[13px] font-semibold text-glow transition-shadow',
+          (open || onSettings) && 'ring-2 ring-ink/30 ring-offset-2 ring-offset-white',
+        )}
+      >
+        林
+      </button>
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 top-12 z-30 w-[248px] rounded-3xl border border-white bg-white p-2 shadow-lift animate-in fade-in slide-in-from-top-1"
+        >
+          <div className="px-3 pb-2 pt-2.5">
+            <p className="text-[14px] font-semibold text-ink">林工</p>
+            <p className="text-xs text-ink-mute">元数据治理组</p>
+          </div>
+          <div className="mx-2 border-t border-line" />
+          <button
+            type="button"
+            role="menuitem"
+            aria-current={onSettings ? 'page' : undefined}
+            onClick={() => {
+              setOpen(false)
+              go(10)
+            }}
+            className={cn(
+              'mt-1 flex w-full flex-col rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-brand-50',
+              onSettings && 'bg-brand-50',
+            )}
+          >
+            <span className="text-[13px] font-medium text-ink">模型设置</span>
+            <span className="text-xs text-ink-mute">当前为本地规则模式</span>
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 const THEMES = [
   { id: 'volt', label: '电光紫', swatch: 'linear-gradient(135deg,#8b6bff,#3f7bff)' },
   { id: 'sky', label: '淡蓝', swatch: 'linear-gradient(135deg,#5bb6ff,#2f8cf0)' },
@@ -180,7 +247,7 @@ function TopBar() {
 
       <nav
         aria-label="主导航"
-        className="scroll-thin mx-auto flex min-w-0 items-center gap-0.5 overflow-x-auto rounded-full bg-white/55 p-1 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.85)] backdrop-blur"
+        className="mx-auto flex h-11 min-w-0 shrink items-center gap-0.5 rounded-full bg-white/55 p-1 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.85)] backdrop-blur"
       >
         {NAV.map((it) => (
           <NavPill key={it.label} item={it} active={it.match.includes(screen)} onClick={() => go(it.target)} />
@@ -205,12 +272,7 @@ function TopBar() {
         >
           <Bell className="size-[18px]" />
         </button>
-        <span
-          className="grid size-10 place-items-center rounded-full bg-ink text-[13px] font-semibold text-glow"
-          title="林 工 · 元数据治理"
-        >
-          林
-        </span>
+        <AvatarMenu />
       </div>
     </header>
   )

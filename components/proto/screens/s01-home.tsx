@@ -5,7 +5,6 @@ import {
   ArrowRight,
   Code2,
   FileText,
-  FlaskConical,
   FolderOpen,
   MoreHorizontal,
   Paperclip,
@@ -26,7 +25,6 @@ import {
   Modal,
   ModalHeader,
   Notice,
-  PageHeader,
   PillTabs,
   Tag,
   Toast,
@@ -189,29 +187,6 @@ export function HomeScreen() {
   return (
     <div className="flex flex-col gap-5">
       <WelcomeHero todo={counts.todo} running={counts.running} done={counts.done} />
-      <PageHeader
-        title="任务工作台"
-        subtitle={`${recents.length} 个最近任务 · ${counts.todo} 项待你确认 · 当前为本地规则模式`}
-        actions={
-          <>
-            <label className="relative">
-              <span className="sr-only">搜索最近任务</span>
-              <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-ink-mute" />
-              <input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="搜索最近任务"
-                className="h-10 w-[240px] rounded-full border border-line bg-white pl-10 pr-4 text-[13px] outline-none placeholder:text-ink-mute focus:border-brand"
-              />
-            </label>
-            <Btn variant="white" className="h-10" onClick={() => setNewOpen(true)}>
-              <Plus className="size-4" />
-              新建任务
-            </Btn>
-          </>
-        }
-      />
-
       <div className="grid grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] gap-5">
         <Card>
           <CardHeader
@@ -306,14 +281,22 @@ export function HomeScreen() {
             { id: 'done', label: '已完成 / 失败', count: counts.done },
           ]}
         />
-        <button
-          type="button"
-          onClick={resetRecents}
-          className="inline-flex h-9 items-center gap-2 rounded-full border border-line bg-white px-4 text-[13px] font-medium text-ink-soft hover:bg-brand-50"
-        >
-          <FlaskConical className="size-4" />
-          恢复合成演示记录
-        </button>
+        <div className="flex items-center gap-2">
+          <label className="relative">
+            <span className="sr-only">搜索最近任务</span>
+            <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-ink-mute" />
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="搜索最近任务"
+              className="h-10 w-[220px] rounded-full border border-line bg-white pl-10 pr-4 text-[13px] outline-none placeholder:text-ink-mute focus:border-brand"
+            />
+          </label>
+          <Btn variant="primary" className="h-10" onClick={() => setNewOpen(true)}>
+            <Plus className="size-4" />
+            新建任务
+          </Btn>
+        </div>
       </div>
 
       <AgentBanner
@@ -428,7 +411,12 @@ export function HomeScreen() {
             <span>
               显示 {list.length} / 共 {recents.length} 项 · 执行中的任务不可移除,移除不等于取消任务
             </span>
-            <span>演示数据均为合成内容</span>
+            <span>
+              演示数据均为合成内容 ·{' '}
+              <button type="button" onClick={resetRecents} className="font-semibold text-brand hover:underline">
+                恢复演示记录
+              </button>
+            </span>
           </footer>
         )}
       </Card>
