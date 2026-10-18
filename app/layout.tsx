@@ -16,7 +16,7 @@ const noto = Noto_Sans_SC({
 })
 
 export const metadata: Metadata = {
-  title: '数源 GrowNex · 产品原型',
+  title: 'GrowNex | 数源 · 产品原型',
   description: '银行 AI 数据工作智能体前端产品原型:任务工作区、元数据治理、数据开发、制度解读与模型设置共 10 张原型图。',
 }
 

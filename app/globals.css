@@ -249,6 +249,37 @@
   --frame-3: #e8e2ff;
 }
 
+[data-theme='sky'] {
+  --ink: #14202e;
+  --ink-rgb: 20 32 46;
+  --ink-600: #243447;
+  --ink-soft: #54657a;
+  --ink-mute: #8797a9;
+  --deep: #162536;
+  --accent: #2f8cf0;
+  --accent-rgb: 47 140 240;
+  --accent-600: #1f78dc;
+  --accent-700: #1a5fb0;
+  --accent-50: #eaf4ff;
+  --accent-100: #cfe4fb;
+  --accent-glow: #8cc8ff;
+  --grad-1: #5bb6ff;
+  --grad-2: #2f8cf0;
+  --grad-3: #4a6fe8;
+  --on-grad: #ffffff;
+  --cream: #f4f8fc;
+  --panel: #edf3fa;
+  --panel2: #e1eaf4;
+  --dash: #c3d1e2;
+  --line: #dde7f2;
+  --stage-1: #e7f0fa;
+  --stage-2: #d4e4f6;
+  --stage-3: #c6d9ee;
+  --frame-1: #f1f6fb;
+  --frame-2: #f5f9fd;
+  --frame-3: #dcecfd;
+}
+
 [data-theme='forest'] {
   --ink: #10201a;
   --ink-rgb: 16 32 26;

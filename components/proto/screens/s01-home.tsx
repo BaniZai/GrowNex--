@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   ArrowRight,
   Code2,
@@ -51,6 +51,87 @@ const statusMeta: Record<RecentTask['status'], { label: string; tone: Tone }> = 
 const typeIcon = { 治理: ShieldCheck, 开发: Code2, 制度: FileText }
 
 type FilterId = 'all' | 'todo' | 'running' | 'done'
+
+const CHEERS = [
+  '每一条被治理的数据,都在让下游更可靠。',
+  '今天的每个口径,都会成为团队明天的共识。',
+  '好数据不是偶然,是你一次次认真确认的结果。',
+  '你的专业判断,是这个平台最宝贵的部分。',
+  '把复杂留给我们,把判断留给你,一起把活干漂亮。',
+]
+
+function greetingFor(hour: number) {
+  if (hour < 6) return '夜深了'
+  if (hour < 11) return '早上好'
+  if (hour < 14) return '中午好'
+  if (hour < 18) return '下午好'
+  return '晚上好'
+}
+
+function WelcomeHero({ todo, running, done }: { todo: number; running: number; done: number }) {
+  const [now, setNow] = useState<Date | null>(null)
+
+  useEffect(() => {
+    setNow(new Date())
+  }, [])
+
+  const greeting = now ? greetingFor(now.getHours()) : '你好'
+  const cheer = CHEERS[(now ? now.getDay() : 0) % CHEERS.length]
+  const dateText = now
+    ? `${now.getMonth() + 1} 月 ${now.getDate()} 日 · 星期${'日一二三四五六'[now.getDay()]}`
+    : '今天'
+
+  const stats = [
+    { label: '待你确认', value: todo, hot: true },
+    { label: '正在执行', value: running, hot: false },
+    { label: '已经完成', value: done, hot: false },
+  ]
+
+  return (
+    <section
+      aria-label="欢迎"
+      className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5 px-1 pt-1"
+    >
+      <div className="min-w-0 max-w-[620px]">
+        <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-ink-mute">{dateText}</p>
+        <h1 className="mt-2 text-balance text-[40px] font-light leading-[1.15] tracking-tight text-ink">
+          {greeting},
+          <span className="font-semibold">林工</span>
+          <span className="ml-1 inline-block h-2.5 w-2.5 rounded-full grad-fire align-middle" aria-hidden />
+        </h1>
+        <p className="mt-3 text-pretty text-[15px] leading-relaxed text-ink-soft">
+          {cheer}
+          {todo > 0 ? (
+            <>
+              {' '}今天有 <span className="font-semibold text-ink">{todo} 项</span>在等你拍板,我们已经准备好了。
+            </>
+          ) : (
+            ' 今天的待办已经清空,可以开始新的任务了。'
+          )}
+        </p>
+      </div>
+
+      <dl className="flex items-end gap-9">
+        {stats.map((s) => (
+          <div key={s.label} className="flex flex-col">
+            <dd
+              className={cn(
+                'text-[56px] font-extralight leading-none tabular-nums tracking-tight',
+                s.hot ? 'text-ink' : 'text-ink/70',
+              )}
+            >
+              {s.value}
+              {s.hot && s.value > 0 && (
+                <span className="relative -top-6 ml-1 inline-block size-2.5 rounded-full grad-fire" aria-hidden />
+              )}
+            </dd>
+            <dt className="mt-1.5 text-[12px] font-medium text-ink-mute">{s.label}</dt>
+          </div>
+        ))}
+      </dl>
+    </section>
+  )
+}
 
 export function HomeScreen() {
   const { recents, removeRecent, resetRecents, go } = useStore()
@@ -107,6 +188,7 @@ export function HomeScreen() {
 
   return (
     <div className="flex flex-col gap-5">
+      <WelcomeHero todo={counts.todo} running={counts.running} done={counts.done} />
       <PageHeader
         title="任务工作台"
         subtitle={`${recents.length} 个最近任务 · ${counts.todo} 项待你确认 · 当前为本地规则模式`}

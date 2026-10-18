@@ -1,39 +1,25 @@
 'use client'
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import {
-  Bell,
-  BookMarked,
-  ChevronLeft,
-  ChevronRight,
-  Clock3,
-  Code2,
-  Database,
-  FileText,
-  LayoutGrid,
-  Settings2,
-  ShieldCheck,
-  WifiOff,
-} from 'lucide-react'
+import { Bell, ChevronLeft, ChevronRight, Clock3, WifiOff } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ModalRootContext } from './ui'
 import { SCREENS, useStore, type ScreenId } from './store'
 
 type NavItem = {
   label: string
-  icon: ReactNode
   target: ScreenId
   match: ScreenId[]
   badge?: number
 }
 
 const NAV: NavItem[] = [
-  { label: '任务工作台', icon: <LayoutGrid className="size-4" />, target: 1, match: [1] },
-  { label: '元数据治理', icon: <ShieldCheck className="size-4" />, target: 3, match: [2, 3, 4, 5], badge: 2 },
-  { label: '数据开发', icon: <Code2 className="size-4" />, target: 7, match: [7, 8], badge: 1 },
-  { label: '制度解读', icon: <FileText className="size-4" />, target: 9, match: [9] },
-  { label: '标准库', icon: <BookMarked className="size-4" />, target: 6, match: [6] },
-  { label: '模型设置', icon: <Settings2 className="size-4" />, target: 10, match: [10] },
+  { label: '任务工作台', target: 1, match: [1] },
+  { label: '元数据治理', target: 3, match: [2, 3, 4, 5], badge: 2 },
+  { label: '数据开发', target: 7, match: [7, 8], badge: 1 },
+  { label: '制度解读', target: 9, match: [9] },
+  { label: '标准库', target: 6, match: [6] },
+  { label: '模型设置', target: 10, match: [10] },
 ]
 
 const statusDot: Record<string, string> = {
@@ -51,11 +37,10 @@ function NavPill({ item, active, onClick }: { item: NavItem; active: boolean; on
       onClick={onClick}
       aria-current={active ? 'page' : undefined}
       className={cn(
-        'relative inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-[13px] font-medium transition-all duration-200',
-        active ? 'bg-ink text-white shadow-[0_8px_18px_-8px_rgba(23,23,26,0.7)]' : 'text-ink-soft hover:bg-white/80 hover:text-ink',
+        'relative inline-flex h-9 shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 text-[13px] font-medium transition-all duration-200',
+        active ? 'bg-ink text-white shadow-[0_8px_18px_-8px_rgb(var(--ink-rgb)/0.7)]' : 'text-ink-soft hover:bg-white/80 hover:text-ink',
       )}
     >
-      <span className={cn('transition-transform duration-200', active ? 'text-glow' : 'group-hover:scale-110')}>{item.icon}</span>
       {item.label}
       {item.badge ? (
         <span
@@ -140,6 +125,7 @@ function RecentsMenu() {
 
 const THEMES = [
   { id: 'volt', label: '电光紫', swatch: 'linear-gradient(135deg,#8b6bff,#3f7bff)' },
+  { id: 'sky', label: '淡蓝', swatch: 'linear-gradient(135deg,#5bb6ff,#2f8cf0)' },
   { id: 'forest', label: '森林绿', swatch: 'linear-gradient(135deg,#3fbf86,#0f6e57)' },
   { id: 'sun', label: '活力橙', swatch: 'linear-gradient(135deg,#ff7a1a,#ff3d6e)' },
 ] as const
@@ -186,13 +172,10 @@ function TopBar() {
       <button
         type="button"
         onClick={() => go(1)}
-        aria-label="数源 GrowNex 首页"
-        className="flex h-11 shrink-0 items-center gap-2.5 rounded-full border border-ink/70 bg-white/50 pl-1.5 pr-4 transition-colors hover:bg-white/90"
+        aria-label="GrowNex | 数源 首页"
+        className="flex h-11 shrink-0 items-center rounded-full border border-ink/70 bg-white/50 px-5 transition-colors hover:bg-white/90"
       >
-        <span className="grid size-8 place-items-center rounded-full bg-ink text-glow">
-          <Database className="size-4" />
-        </span>
-        <span className="text-[16px] font-semibold tracking-tight text-ink">数源 GrowNex</span>
+        <span className="text-[16px] font-semibold tracking-tight text-ink">GrowNex | 数源</span>
       </button>
 
       <nav
