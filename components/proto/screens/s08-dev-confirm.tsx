@@ -158,7 +158,7 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
                             if (e.key === 'Escape') setEditing(null)
                           }}
                           placeholder={i.hint}
-                          className="h-10 min-w-0 flex-1 rounded-xl border-2 border-[#f5c93b] bg-white px-3 text-[13px] outline-none"
+                          className="h-10 min-w-0 flex-1 rounded-xl border-2 border-[#1fa592] bg-white px-3 text-[13px] outline-none"
                         />
                         <Btn variant="primary" size="sm" className="h-10" onClick={() => save(i.id)}>保存</Btn>
                         <Btn variant="white" size="sm" className="h-10" onClick={() => setEditing(null)}>取消</Btn>
@@ -173,7 +173,7 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
               )
             })}
           </ol>
-          <footer className="flex items-center gap-2 border-t border-line bg-[#fbfaf5] px-6 py-3 text-xs text-ink-mute">
+          <footer className="flex items-center gap-2 border-t border-line bg-[#f6f8fa] px-6 py-3 text-xs text-ink-mute">
             <Lock className="size-3.5 shrink-0" />
             需求、数据源、所选字段或口径发生实质变化时,确认自动失效。
           </footer>

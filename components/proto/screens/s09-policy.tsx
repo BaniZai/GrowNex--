@@ -53,7 +53,7 @@ export function PolicyScreen() {
           <Card>
             <CardHeader title="录入通知" sub="上传文件,或手工粘贴正文" right={<span className="text-xs text-ink-mute">TXT · MD · DOCX</span>} />
             <div className="flex flex-col gap-4 p-6 pt-4">
-              <div className="flex items-center gap-4 rounded-2xl border-2 border-dashed border-[#d9d3bd] bg-[#fbfaf5] px-5 py-5">
+              <div className="flex items-center gap-4 rounded-2xl border-2 border-dashed border-[#c3ced8] bg-[#f6f8fa] px-5 py-5">
                 <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-white text-brand shadow-[0_6px_16px_-8px_rgba(23,23,26,0.5)]"><Upload className="size-5" /></span>
                 <div className="min-w-0 flex-1">
                   <p className="text-[14px] font-semibold">拖入通知文件</p>
@@ -145,9 +145,9 @@ export function PolicyScreen() {
             <Card>
               <CardHeader title="关于加强数据治理工作的通知" sub="合成演示通知 · TXT · 来源:本机文件" right={<FlagTag>合成演示</FlagTag>} />
               <div className="flex flex-col gap-4 p-6 pt-4">
-                <div className="rounded-2xl bg-[#f7f5ec] p-5">
+                <div className="rounded-2xl bg-[#f1f5f8] p-5">
                   <SectionLabel className="flex items-center gap-1.5"><Quote className="size-3.5" />原文依据</SectionLabel>
-                  <blockquote className="mt-2 border-l-2 border-[#f5c93b] pl-4 text-[14px] leading-7">
+                  <blockquote className="mt-2 border-l-2 border-[#1fa592] pl-4 text-[14px] leading-7">
                     各部门应于 <mark className="rounded bg-[#ffe9d6] px-1">11 月 30 日前</mark>完成核心业务系统表字段的中文注释补全,并由数据管理部门统一审核。
                   </blockquote>
                   <p className="mt-2 text-xs text-ink-mute">第 2 段 · 第 1 句</p>

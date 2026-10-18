@@ -193,7 +193,7 @@ export function GenerateScreen() {
               {items.map((i) => {
                 const m = stateMeta[i.state]
                 return (
-                  <li key={i.id} className={cn('flex items-center gap-4 px-6 py-3.5', i.state !== 'ok' && 'bg-[#fffdf6]')}>
+                  <li key={i.id} className={cn('flex items-center gap-4 px-6 py-3.5', i.state !== 'ok' && 'bg-[#fbfdfe]')}>
                     <Checkbox
                       checked={i.checked}
                       disabled={i.state !== 'ok'}
@@ -221,7 +221,7 @@ export function GenerateScreen() {
                 )
               })}
             </ul>
-            <footer className="border-t border-line bg-[#fbfaf5] px-6 py-3 text-xs text-ink-mute">
+            <footer className="border-t border-line bg-[#f6f8fa] px-6 py-3 text-xs text-ink-mute">
               批量确认只处理「状态有效」的建议,含英文、为空、来源冲突的项不会被悄悄批准。
             </footer>
           </Card>
@@ -264,11 +264,11 @@ export function GenerateScreen() {
             <p className="mt-1 text-[13px] text-ink-soft">CORE_ACCT 账户系统 · 本地规则</p>
           </div>
           {phase === 'cancelling' ? (
-            <div className="w-full rounded-2xl bg-[#f7f5ec] p-4 text-left text-[13px] leading-5 text-ink-soft">
+            <div className="w-full rounded-2xl bg-[#f1f5f8] p-4 text-left text-[13px] leading-5 text-ink-soft">
               取消后不会写入未完成的建议,已有审核状态保持不变。请勿重复提交。
             </div>
           ) : (
-            <div className="w-full rounded-2xl bg-[#f7f5ec] p-4 text-left">
+            <div className="w-full rounded-2xl bg-[#f1f5f8] p-4 text-left">
               <ol className="space-y-2 text-[13px]">
                 {STAGES.map((s, idx) => (
                   <li key={s} className="flex items-center gap-2.5">
@@ -311,7 +311,7 @@ export function GenerateScreen() {
             </li>
           </ul>
         </div>
-        <footer className="flex justify-end gap-3 border-t border-line bg-[#fbfaf5] px-7 py-4">
+        <footer className="flex justify-end gap-3 border-t border-line bg-[#f6f8fa] px-7 py-4">
           <Btn variant="white" className="h-10 px-5" onClick={() => setBatchOpen(false)}>取消</Btn>
           <Btn variant="primary" className="h-10 px-5" onClick={batchConfirm}>确认有效项</Btn>
         </footer>
@@ -340,7 +340,7 @@ export function GenerateScreen() {
             />
           </div>
           <dl className="grid grid-cols-3 gap-3">
-            <div className="rounded-2xl bg-[#f7f5ec] px-4 py-3">
+            <div className="rounded-2xl bg-[#f1f5f8] px-4 py-3">
               <dt className="text-xs text-ink-mute">已确认</dt>
               <dd className="text-[22px] font-semibold tabular-nums leading-8">{confirmed.length}</dd>
             </div>
@@ -375,7 +375,7 @@ export function GenerateScreen() {
             输出内容含审核依据;文件由你自行审阅后在数据库侧执行。
           </p>
         </div>
-        <footer className="flex justify-end gap-3 border-t border-line bg-[#fbfaf5] px-7 py-4">
+        <footer className="flex justify-end gap-3 border-t border-line bg-[#f6f8fa] px-7 py-4">
           <Btn variant="white" className="h-10 px-5" onClick={() => setExportOpen(false)}>取消</Btn>
           <Btn
             variant="primary"

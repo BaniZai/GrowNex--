@@ -13,8 +13,8 @@ export type Tone = 'red' | 'amber' | 'purple' | 'gray' | 'green' | 'dark' | 'blu
 const toneMap: Record<Tone, { box: string; dot: string }> = {
   red: { box: 'bg-[#fde8ec] text-[#b4233a]', dot: 'bg-[#d93a52]' },
   amber: { box: 'bg-[#ffe9d6] text-[#9a4a00]', dot: 'bg-[#f08a1a]' },
-  purple: { box: 'bg-[#fdf0b8] text-[#4d3b00]', dot: 'bg-[#e5b52a]' },
-  gray: { box: 'bg-[#f1efe8] text-[#5c5b57]', dot: 'bg-[#a9a69b]' },
+  purple: { box: 'bg-[#d9efec] text-[#0b4a46]', dot: 'bg-[#178f7e]' },
+  gray: { box: 'bg-[#edf0f3] text-[#55606e]', dot: 'bg-[#a9a69b]' },
   green: { box: 'bg-[#dcf4e6] text-[#17704a]', dot: 'bg-[#25a56a]' },
   blue: { box: 'bg-[#e3effd] text-[#1e5aa8]', dot: 'bg-[#3b82d6]' },
   dark: { box: 'bg-ink text-white', dot: 'bg-white' },
@@ -51,7 +51,7 @@ export function FlagTag({ children, className }: { children: ReactNode; classNam
   return (
     <span
       className={cn(
-        'inline-flex h-6 shrink-0 items-center whitespace-nowrap rounded-full border border-dashed border-[#cfc8aa] bg-white/60 px-2.5 text-xs font-medium text-brand',
+        'inline-flex h-6 shrink-0 items-center whitespace-nowrap rounded-full border border-dashed border-[#b9c6d1] bg-white/60 px-2.5 text-xs font-medium text-brand',
         className,
       )}
     >
@@ -219,7 +219,7 @@ export function AgentBanner({
 }) {
   return (
     <div className="agent-banner flex items-center gap-4 rounded-2xl px-5 py-4 text-white shadow-[0_14px_30px_-18px_rgba(23,23,26,0.9)]">
-      <div className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#fbe39a] to-[#f5c93b] text-deep">
+      <div className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#8fe3d3] to-[#1fa592] text-deep">
         {icon}
       </div>
       <div className="min-w-0 flex-1">
@@ -281,8 +281,8 @@ export function RingLoader({ size = 56, className }: { size?: number; className?
     >
       <defs>
         <linearGradient id="ring-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#f9e08a" />
-          <stop offset="100%" stopColor="#f5c93b" />
+          <stop offset="0%" stopColor="#7fd8c8" />
+          <stop offset="100%" stopColor="#1fa592" />
         </linearGradient>
       </defs>
       <circle cx="25" cy="25" r="20" fill="none" stroke="#ebe7da" strokeWidth="5" />
@@ -332,7 +332,7 @@ export function Checkbox({
         aria-hidden
         className={cn(
           'grid size-[18px] shrink-0 place-items-center rounded-md border transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand',
-          checked ? 'border-brand bg-brand text-white' : 'border-[#d4cfbb] bg-white',
+          checked ? 'border-brand bg-brand text-white' : 'border-[#c9d2da] bg-white',
         )}
       >
         {checked && <Check className="size-3" strokeWidth={3} />}
@@ -358,7 +358,7 @@ export function Segmented<T extends string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className="flex rounded-full bg-[#f4f1e6] p-1 shadow-[inset_0_0_0_1px_rgba(23,23,26,0.06)]"
+      className="flex rounded-full bg-[#e9eef2] p-1 shadow-[inset_0_0_0_1px_rgba(23,23,26,0.06)]"
     >
       {items.map((it) => {
         const active = it.id === value
@@ -411,7 +411,7 @@ export function Modal({
 
   if (!open || !root) return null
   return createPortal(
-    <div className="pointer-events-auto absolute inset-0 z-50 flex items-center justify-center bg-[#17171a]/25 p-6 backdrop-blur-[6px]">
+    <div className="pointer-events-auto absolute inset-0 z-50 flex items-center justify-center bg-[#0f1c2e]/25 p-6 backdrop-blur-[6px]">
       <div
         role="dialog"
         aria-modal="true"
@@ -483,7 +483,7 @@ export function Toast({
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-24 left-1/2 z-[60] flex w-[min(92vw,460px)] -translate-x-1/2 items-center gap-3 rounded-2xl bg-[#17171a] px-4 py-3 text-white shadow-[0_20px_50px_-16px_rgba(23,23,26,0.8)] animate-in fade-in slide-in-from-bottom-2"
+      className="fixed bottom-24 left-1/2 z-[60] flex w-[min(92vw,460px)] -translate-x-1/2 items-center gap-3 rounded-2xl bg-[#0f1c2e] px-4 py-3 text-white shadow-[0_20px_50px_-16px_rgba(23,23,26,0.8)] animate-in fade-in slide-in-from-bottom-2"
     >
       <div className="grid size-8 shrink-0 place-items-center rounded-full bg-white/10">
         {icon ?? <Check className="size-4" />}
@@ -543,7 +543,7 @@ export function Notice({
   className?: string
 }) {
   const map = {
-    purple: 'bg-brand-50 text-[#17171a]',
+    purple: 'bg-brand-50 text-[#0f1c2e]',
     amber: 'bg-[#ffeee0] text-[#8a3f00]',
     red: 'bg-[#fdecef] text-[#a31f35]',
     green: 'bg-[#e4f6ec] text-[#14623f]',
