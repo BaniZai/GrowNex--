@@ -37,8 +37,8 @@ const NAV: NavItem[] = [
 ]
 
 const statusDot: Record<string, string> = {
-  review: 'bg-[#f08a1a]',
-  confirm: 'bg-[#f08a1a]',
+  review: 'bg-[#e5a400]',
+  confirm: 'bg-[#e5a400]',
   done: 'bg-[#25a56a]',
   running: 'bg-sun',
   failed: 'bg-[#e8657a]',
@@ -61,7 +61,7 @@ function NavPill({ item, active, onClick }: { item: NavItem; active: boolean; on
         <span
           className={cn(
             'grid h-[18px] min-w-[18px] place-items-center rounded-full px-1 text-[10px] font-bold tabular-nums',
-            active ? 'bg-sun text-ink' : 'bg-ink text-white',
+            active ? 'grad-fire text-ink' : 'bg-ink text-white',
           )}
         >
           {item.badge}

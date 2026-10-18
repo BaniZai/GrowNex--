@@ -87,7 +87,7 @@ export function HomeScreen() {
     t,
     n: recents.filter((r) => r.type === t).length,
   }))
-  const colors = ['#0f1c2e', '#1fa592', '#9fb3c8']
+  const colors = ['#16161a', '#ff5a1f', '#9fb3c8']
 
   const confirmRemove = () => {
     if (!target) return
@@ -143,7 +143,7 @@ export function HomeScreen() {
                 key={s.title}
                 type="button"
                 onClick={() => go(s.target)}
-                className="group flex flex-col gap-3 rounded-2xl border border-line bg-[#f6f8fa] p-4 text-left transition-colors hover:border-[#c3ced8] hover:bg-brand-50"
+                className="group flex flex-col gap-3 rounded-2xl border border-line bg-[#f7f5f2] p-4 text-left transition-colors hover:border-[#cfc9c0] hover:bg-brand-50"
               >
                 <span className="grid size-10 place-items-center rounded-xl bg-white text-brand shadow-[0_2px_8px_-2px_rgba(23,23,26,0.25)]">
                   {s.icon}
@@ -158,7 +158,7 @@ export function HomeScreen() {
               </button>
             ))}
           </div>
-          <div className="mx-6 mb-6 flex items-center gap-3 rounded-2xl border border-dashed border-[#c3ced8] bg-white px-4 py-3">
+          <div className="mx-6 mb-6 flex items-center gap-3 rounded-2xl border border-dashed border-[#cfc9c0] bg-white px-4 py-3">
             <Paperclip className="size-4 shrink-0 text-ink-mute" />
             <p className="min-w-0 flex-1 text-[13px] text-ink-soft">
               或先选择附件:支持 SQL、XLS、XLSX、CSV、TSV、TXT、MD、DOCX。文件仅在本机解析,不会上传云端。
@@ -173,7 +173,7 @@ export function HomeScreen() {
           <CardHeader title="最近任务分布" right={<span className="text-xs text-ink-mute">共 {recents.length} 项</span>} />
           <div className="flex items-center gap-5 p-6 pt-4">
             <svg viewBox="0 0 100 100" className="size-[112px] shrink-0 -rotate-90" role="img" aria-label="最近任务类型分布">
-              <circle cx="50" cy="50" r="38" fill="none" stroke="#efeadb" strokeWidth="12" />
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#efebe5" strokeWidth="12" />
               {typeCounts.map((c, i) => {
                 const len = (c.n / Math.max(recents.length, 1)) * C
                 const el = (
@@ -296,7 +296,7 @@ export function HomeScreen() {
                 const Icon = typeIcon[r.type]
                 const m = statusMeta[r.status]
                 return (
-                  <tr key={r.id} className="h-[68px] border-b border-line/70 last:border-b-0 hover:bg-[#f6f8fa]">
+                  <tr key={r.id} className="h-[68px] border-b border-line/70 last:border-b-0 hover:bg-[#f7f5f2]">
                     <td className="px-6">
                       <button
                         type="button"
@@ -383,7 +383,7 @@ export function HomeScreen() {
             <label htmlFor="task-desc" className="mb-2 block text-[13px] font-semibold">
               你想完成什么?
             </label>
-            <div className="rounded-2xl border-2 border-[#1fa592] bg-white p-3 shadow-[0_0_0_4px_rgba(23,23,26,0.08)]">
+            <div className="rounded-2xl border-2 border-[#ff5a1f] bg-white p-3 shadow-[0_0_0_4px_rgba(23,23,26,0.08)]">
               <textarea
                 id="task-desc"
                 value={desc}
@@ -401,7 +401,7 @@ export function HomeScreen() {
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-3 rounded-2xl bg-[#eef3f6] px-4 py-4">
+          <div className="flex items-center gap-3 rounded-2xl bg-[#f1eee9] px-4 py-4">
             <Paperclip className="size-4 text-ink-mute" />
             <div className="min-w-0 flex-1">
               <p className="text-[13px] font-semibold">添加资料(可选)</p>
@@ -409,7 +409,7 @@ export function HomeScreen() {
             </div>
           </div>
         </div>
-        <footer className="flex justify-end gap-3 border-t border-line bg-[#f6f8fa] px-7 py-4">
+        <footer className="flex justify-end gap-3 border-t border-line bg-[#f7f5f2] px-7 py-4">
           <Btn variant="white" className="h-11 px-6" onClick={() => setNewOpen(false)}>
             取消
           </Btn>
@@ -433,11 +433,11 @@ export function HomeScreen() {
             只移除最近记录,<b className="text-ink">保留本地结果文件和当前工作区内容</b>。该操作不会取消任务,也不会删除引用的数据集。
           </p>
           <label className="flex items-center gap-2 text-xs text-ink-mute">
-            <input type="checkbox" checked={failedSave} onChange={(e) => setFailedSave(e.target.checked)} className="size-3.5 accent-[#0f1c2e]" />
+            <input type="checkbox" checked={failedSave} onChange={(e) => setFailedSave(e.target.checked)} className="size-3.5 accent-[#16161a]" />
             演示:模拟保存失败(AC-07)
           </label>
         </div>
-        <footer className="flex justify-end gap-3 border-t border-line bg-[#f6f8fa] px-7 py-4">
+        <footer className="flex justify-end gap-3 border-t border-line bg-[#f7f5f2] px-7 py-4">
           <Btn variant="white" className="h-10 px-5" autoFocus onClick={() => setTarget(null)}>
             取消
           </Btn>
@@ -452,7 +452,7 @@ export function HomeScreen() {
         <p className="px-7 py-5 text-[14px] leading-6 text-ink-soft">
           结果文件已不在原保存位置,可能被移动或删除。不会生成空白结果。你可以移除这条记录,或重新发起任务。
         </p>
-        <footer className="flex justify-end gap-3 border-t border-line bg-[#f6f8fa] px-7 py-4">
+        <footer className="flex justify-end gap-3 border-t border-line bg-[#f7f5f2] px-7 py-4">
           <Btn variant="white" onClick={() => setOpenFail(null)}>知道了</Btn>
           <Btn variant="primary" onClick={() => { setTarget(openFail); setOpenFail(null) }}>移除这条记录</Btn>
         </footer>

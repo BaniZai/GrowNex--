@@ -53,7 +53,7 @@ export function PolicyScreen() {
           <Card>
             <CardHeader title="录入通知" sub="上传文件,或手工粘贴正文" right={<span className="text-xs text-ink-mute">TXT · MD · DOCX</span>} />
             <div className="flex flex-col gap-4 p-6 pt-4">
-              <div className="flex items-center gap-4 rounded-2xl border-2 border-dashed border-[#c3ced8] bg-[#f6f8fa] px-5 py-5">
+              <div className="flex items-center gap-4 rounded-2xl border-2 border-dashed border-[#cfc9c0] bg-[#f7f5f2] px-5 py-5">
                 <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-white text-brand shadow-[0_6px_16px_-8px_rgba(23,23,26,0.5)]"><Upload className="size-5" /></span>
                 <div className="min-w-0 flex-1">
                   <p className="text-[14px] font-semibold">拖入通知文件</p>
@@ -145,10 +145,10 @@ export function PolicyScreen() {
             <Card>
               <CardHeader title="关于加强数据治理工作的通知" sub="合成演示通知 · TXT · 来源:本机文件" right={<FlagTag>合成演示</FlagTag>} />
               <div className="flex flex-col gap-4 p-6 pt-4">
-                <div className="rounded-2xl bg-[#f1f5f8] p-5">
+                <div className="rounded-2xl bg-[#f2efea] p-5">
                   <SectionLabel className="flex items-center gap-1.5"><Quote className="size-3.5" />原文依据</SectionLabel>
-                  <blockquote className="mt-2 border-l-2 border-[#1fa592] pl-4 text-[14px] leading-7">
-                    各部门应于 <mark className="rounded bg-[#ffe9d6] px-1">11 月 30 日前</mark>完成核心业务系统表字段的中文注释补全,并由数据管理部门统一审核。
+                  <blockquote className="mt-2 border-l-2 border-[#ff5a1f] pl-4 text-[14px] leading-7">
+                    各部门应于 <mark className="rounded bg-[#fff0c9] px-1">11 月 30 日前</mark>完成核心业务系统表字段的中文注释补全,并由数据管理部门统一审核。
                   </blockquote>
                   <p className="mt-2 text-xs text-ink-mute">第 2 段 · 第 1 句</p>
                 </div>
@@ -205,7 +205,7 @@ export function PolicyScreen() {
               <CardHeader title="待确认项" />
               <ul className="space-y-2.5 p-6 pt-4 text-[13px] leading-5">
                 {['信贷系统是否纳入范围', '「统一审核」的具体流程与人员'].map((x) => (
-                  <li key={x} className="flex gap-2.5"><TriangleAlert className="mt-0.5 size-4 shrink-0 text-[#e07a10]" />{x}</li>
+                  <li key={x} className="flex gap-2.5"><TriangleAlert className="mt-0.5 size-4 shrink-0 text-[#d49400]" />{x}</li>
                 ))}
               </ul>
             </Card>

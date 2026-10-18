@@ -122,11 +122,11 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
               const isEdit = editing === i.id
               return (
                 <li key={i.id} className="relative flex gap-4 pb-5 last:pb-0">
-                  {!last && <span aria-hidden className="absolute bottom-0 left-[13px] top-7 w-0.5 bg-[#e6e1cf]" />}
+                  {!last && <span aria-hidden className="absolute bottom-0 left-[13px] top-7 w-0.5 bg-[#e6e1da]" />}
                   <span
                     className={cn(
                       'relative z-[1] grid size-7 shrink-0 place-items-center rounded-full border-2 text-xs font-semibold',
-                      i.state === 'filled' ? 'border-brand bg-brand text-white' : 'border-[#f5b36a] bg-white text-[#9a4a00]',
+                      i.state === 'filled' ? 'border-brand bg-brand text-white' : 'border-[#f3cf6b] bg-white text-[#8a5a00]',
                     )}
                   >
                     {i.state === 'filled' ? <Check className="size-3.5" strokeWidth={3} /> : <CircleHelp className="size-3.5" />}
@@ -158,7 +158,7 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
                             if (e.key === 'Escape') setEditing(null)
                           }}
                           placeholder={i.hint}
-                          className="h-10 min-w-0 flex-1 rounded-xl border-2 border-[#1fa592] bg-white px-3 text-[13px] outline-none"
+                          className="h-10 min-w-0 flex-1 rounded-xl border-2 border-[#ff5a1f] bg-white px-3 text-[13px] outline-none"
                         />
                         <Btn variant="primary" size="sm" className="h-10" onClick={() => save(i.id)}>保存</Btn>
                         <Btn variant="white" size="sm" className="h-10" onClick={() => setEditing(null)}>取消</Btn>
@@ -166,14 +166,14 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
                     ) : i.state === 'filled' ? (
                       <p className="mt-1 text-[13px] leading-5 text-ink-soft">{i.value}</p>
                     ) : (
-                      <p className="mt-1 text-[13px] leading-5 text-[#9a4a00]">{i.hint}</p>
+                      <p className="mt-1 text-[13px] leading-5 text-[#8a5a00]">{i.hint}</p>
                     )}
                   </div>
                 </li>
               )
             })}
           </ol>
-          <footer className="flex items-center gap-2 border-t border-line bg-[#f6f8fa] px-6 py-3 text-xs text-ink-mute">
+          <footer className="flex items-center gap-2 border-t border-line bg-[#f7f5f2] px-6 py-3 text-xs text-ink-mute">
             <Lock className="size-3.5 shrink-0" />
             需求、数据源、所选字段或口径发生实质变化时,确认自动失效。
           </footer>
@@ -212,7 +212,7 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
                   <ClipboardCopy className="size-3.5" />
                   复制
                 </button>
-                <pre className="scroll-thin max-h-[360px] overflow-auto whitespace-pre-wrap pr-16 font-mono text-[12.5px] leading-6 text-[#e6e1cf]">
+                <pre className="scroll-thin max-h-[360px] overflow-auto whitespace-pre-wrap pr-16 font-mono text-[12.5px] leading-6 text-[#e6e1da]">
                   {content[tab]}
                 </pre>
               </div>

@@ -105,7 +105,7 @@ export function SettingsScreen() {
                 <Notice tone="amber" icon={<TriangleAlert className="size-4" />}>
                   <p>公网模式<b>默认禁止发送业务资料</b>。需下方单独授权,并且仍受内容范围限制。</p>
                   <label className="mt-2 inline-flex items-center gap-2 text-[13px]">
-                    <input type="checkbox" checked={allowOut} onChange={(e) => setAllowOut(e.target.checked)} className="size-4 accent-[#0f1c2e]" />
+                    <input type="checkbox" checked={allowOut} onChange={(e) => setAllowOut(e.target.checked)} className="size-4 accent-[#16161a]" />
                     我已了解风险,允许发送所选字段的脱敏内容
                   </label>
                 </Notice>
@@ -140,7 +140,7 @@ export function SettingsScreen() {
                 <label htmlFor="key" className="mb-2 block text-[13px] font-semibold">密钥</label>
                 <div className="relative">
                   <KeyRound className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-ink-mute" />
-                  <input id="key" readOnly value="••••••••••••••••" className="h-11 w-full rounded-xl border border-line bg-[#f1f5f8] pl-10 pr-24 font-mono text-[13px] text-ink-soft outline-none" />
+                  <input id="key" readOnly value="••••••••••••••••" className="h-11 w-full rounded-xl border border-line bg-[#f2efea] pl-10 pr-24 font-mono text-[13px] text-ink-soft outline-none" />
                   <button type="button" className="absolute right-2 top-1/2 h-8 -translate-y-1/2 rounded-full bg-white px-3 text-xs font-semibold text-brand shadow-sm hover:bg-brand-50">更换</button>
                 </div>
                 <p className="mt-1.5 flex items-center gap-1.5 text-xs text-ink-mute"><Lock className="size-3" />不明文展示,不进入结果和错误信息</p>
@@ -159,9 +159,9 @@ export function SettingsScreen() {
                 <input id="to" value={timeout} onChange={(e) => setTimeoutV(e.target.value.replace(/\D/g, ''))} inputMode="numeric" className="h-11 w-full rounded-xl border border-line bg-white px-4 text-[13px] tabular-nums outline-none focus:border-brand" />
               </div>
             </div>
-            <footer className="flex items-center justify-between border-t border-line bg-[#f6f8fa] px-6 py-3 text-xs text-ink-mute">
+            <footer className="flex items-center justify-between border-t border-line bg-[#f7f5f2] px-6 py-3 text-xs text-ink-mute">
               <label className="inline-flex items-center gap-2">
-                <input type="checkbox" checked={simFail} onChange={(e) => setSimFail(e.target.checked)} className="size-3.5 accent-[#0f1c2e]" />
+                <input type="checkbox" checked={simFail} onChange={(e) => setSimFail(e.target.checked)} className="size-3.5 accent-[#16161a]" />
                 演示:模拟保存失败(已填内容保留)
               </label>
               <span>保存不会触发连接测试</span>
@@ -180,7 +180,7 @@ export function SettingsScreen() {
                   ['模型响应', test === 'ok' ? '有效响应' : '—'],
                   ['耗时', test === 'ok' && ms ? `${(ms / 1000).toFixed(2)} 秒` : '—'],
                 ].map(([k, v]) => (
-                  <div key={k} className="flex items-center justify-between rounded-xl bg-[#f1f5f8] px-4 py-2.5">
+                  <div key={k} className="flex items-center justify-between rounded-xl bg-[#f2efea] px-4 py-2.5">
                     <dt className="text-ink-soft">{k}</dt>
                     <dd className={cn('font-semibold', v === '—' && 'font-normal text-ink-mute')}>{v}</dd>
                   </div>

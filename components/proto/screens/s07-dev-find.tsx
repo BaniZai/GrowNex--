@@ -99,13 +99,13 @@ export function DevFindScreen() {
                 <span
                   className={cn(
                     'inline-flex h-8 items-center gap-2 rounded-full px-3 text-xs font-medium',
-                    i < 2 ? 'bg-brand text-white' : i === 2 ? 'bg-brand-100 text-brand' : 'bg-[#edf0f3] text-ink-mute',
+                    i < 2 ? 'bg-brand text-white' : i === 2 ? 'bg-brand-100 text-brand' : 'bg-[#efece7] text-ink-mute',
                   )}
                 >
                   <span className="grid size-4 place-items-center rounded-full bg-white/25 text-[10px] font-semibold">{i + 1}</span>
                   {s}
                 </span>
-                {i < STEPS.length - 1 && <span className="h-px w-4 bg-[#cfd8e0]" aria-hidden />}
+                {i < STEPS.length - 1 && <span className="h-px w-4 bg-[#d9d3ca]" aria-hidden />}
               </li>
             ))}
           </ol>
@@ -130,7 +130,7 @@ export function DevFindScreen() {
             <div className="flex flex-col gap-4 p-6 pt-4">
               <div>
                 <label htmlFor="goal" className="mb-2 block text-[13px] font-semibold">业务目标</label>
-                <div className="rounded-2xl border-2 border-[#1fa592] bg-white p-3 shadow-[0_0_0_4px_rgba(23,23,26,0.08)]">
+                <div className="rounded-2xl border-2 border-[#ff5a1f] bg-white p-3 shadow-[0_0_0_4px_rgba(23,23,26,0.08)]">
                   <textarea
                     id="goal"
                     value={goal}
@@ -166,7 +166,7 @@ export function DevFindScreen() {
                   <Search className="size-4" />
                   在所选范围检索
                 </Btn>
-                {noSource && <span className="text-xs text-[#9a4a00]">请先在右侧选择数据来源范围</span>}
+                {noSource && <span className="text-xs text-[#8a5a00]">请先在右侧选择数据来源范围</span>}
               </div>
             </div>
           </Card>
@@ -225,7 +225,7 @@ export function DevFindScreen() {
                 ))}
               </ul>
             )}
-            <footer className="flex items-center gap-2 border-t border-line bg-[#f6f8fa] px-6 py-3 text-xs text-ink-mute">
+            <footer className="flex items-center gap-2 border-t border-line bg-[#f7f5f2] px-6 py-3 text-xs text-ink-mute">
               <ShieldAlert className="size-3.5 shrink-0" />
               敏感字段不会被默认选中,也不会默认发送给模型。
             </footer>
@@ -250,7 +250,7 @@ export function DevFindScreen() {
               </select>
               {src && (
                 <p className="mt-3 text-xs leading-5 text-ink-soft">
-                  {src.source} · {src.tables} 表 · {src.fields.toLocaleString()} 字段{src.status === 'partial' && <span className="text-[#9a4a00]"> · 数据集不完整</span>}
+                  {src.source} · {src.tables} 表 · {src.fields.toLocaleString()} 字段{src.status === 'partial' && <span className="text-[#8a5a00]"> · 数据集不完整</span>}
                 </p>
               )}
             </div>
@@ -277,8 +277,8 @@ export function DevFindScreen() {
                   <div>
                     <SectionLabel>口径缺口</SectionLabel>
                     <ul className="mt-2 space-y-1.5 text-[13px] leading-5">
-                      <li className="flex gap-2"><CircleAlert className="mt-0.5 size-3.5 shrink-0 text-[#e07a10]" />「贷款余额」含义未审核</li>
-                      <li className="flex gap-2"><CircleAlert className="mt-0.5 size-3.5 shrink-0 text-[#e07a10]" />LOAN_STS 无可用解释,有效状态未知</li>
+                      <li className="flex gap-2"><CircleAlert className="mt-0.5 size-3.5 shrink-0 text-[#d49400]" />「贷款余额」含义未审核</li>
+                      <li className="flex gap-2"><CircleAlert className="mt-0.5 size-3.5 shrink-0 text-[#d49400]" />LOAN_STS 无可用解释,有效状态未知</li>
                     </ul>
                   </div>
                   <div className="rounded-2xl bg-brand-50 p-3.5">
@@ -286,7 +286,7 @@ export function DevFindScreen() {
                     <p className="mt-1 text-[13px] leading-5">先在治理中审核 LOAN_BAL、LOAN_STS 的解释,返回后会重读最新结果。</p>
                   </div>
                   {hasUnreviewed && (
-                    <p className="flex items-start gap-1.5 text-xs leading-5 text-[#9a4a00]">
+                    <p className="flex items-start gap-1.5 text-xs leading-5 text-[#8a5a00]">
                       <MessageSquareText className="mt-0.5 size-3.5 shrink-0" />
                       未审核建议已清晰标记,不会混入业务事实。
                     </p>

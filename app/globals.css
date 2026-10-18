@@ -165,20 +165,20 @@
 @theme inline {
   --font-sans: var(--font-jakarta), var(--font-noto), 'Microsoft YaHei', 'PingFang SC', system-ui, sans-serif;
   --font-mono: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
-  --color-ink: #0f1c2e;
-  --color-ink-soft: #55606e;
-  --color-ink-mute: #86909c;
-  --color-brand: #0f1c2e;
-  --color-brand-600: #1d2d44;
-  --color-brand-50: #e8f4f2;
-  --color-brand-100: #cfe9e5;
-  --color-sun: #1fa592;
-  --color-sun-600: #178f7e;
-  --color-cream: #f6f8fa;
-  --color-line: #e3e8ec;
-  --color-deep: #12233a;
-  --shadow-card: 0 1px 2px rgba(15, 28, 46, 0.04), 0 16px 34px -20px rgba(15, 28, 46, 0.22);
-  --shadow-lift: 0 1px 2px rgba(15, 28, 46, 0.05), 0 22px 40px -18px rgba(15, 28, 46, 0.3);
+  --color-ink: #16161a;
+  --color-ink-soft: #5c5a57;
+  --color-ink-mute: #8f8b85;
+  --color-brand: #16161a;
+  --color-brand-600: #2a2a31;
+  --color-brand-50: #fff1e9;
+  --color-brand-100: #ffd9c5;
+  --color-sun: #ff5a1f;
+  --color-sun-600: #e8480c;
+  --color-cream: #f7f5f2;
+  --color-line: #e8e4de;
+  --color-deep: #1c1c21;
+  --shadow-card: 0 1px 2px rgba(22, 22, 26, 0.04), 0 16px 34px -20px rgba(22, 22, 26, 0.22);
+  --shadow-lift: 0 1px 2px rgba(22, 22, 26, 0.05), 0 22px 40px -18px rgba(22, 22, 26, 0.3);
 }
 
 @layer base {
@@ -192,28 +192,33 @@
     cursor: pointer;
   }
   :focus-visible {
-    outline: 2px solid #0f1c2e;
+    outline: 2px solid #16161a;
     outline-offset: 2px;
   }
 }
 
 .stage-bg {
   background:
-    radial-gradient(900px 520px at 12% 0%, #cbd5de 0%, rgba(203, 213, 222, 0) 65%),
-    radial-gradient(900px 600px at 100% 100%, #b4c3cf 0%, rgba(180, 195, 207, 0) 60%),
-    #a8b7c4;
+    radial-gradient(900px 520px at 12% 0%, #f1ece4 0%, rgba(241, 236, 228, 0) 65%),
+    radial-gradient(900px 600px at 100% 100%, #e6dccf 0%, rgba(230, 220, 207, 0) 60%),
+    #d9d2c7;
+}
+
+.grad-fire {
+  background: linear-gradient(135deg, #ff7a1a 0%, #ff4d2e 55%, #ff3d6e 100%);
 }
 
 .frame-bg {
   background:
-    radial-gradient(700px 420px at 100% 100%, rgba(31, 165, 146, 0.28) 0%, rgba(31, 165, 146, 0) 70%),
-    linear-gradient(125deg, #e6eaef 0%, #eef2f4 45%, #e3f1ee 80%, #cfe9e5 100%);
+    radial-gradient(640px 380px at 100% 100%, rgba(255, 90, 31, 0.2) 0%, rgba(255, 90, 31, 0) 70%),
+    radial-gradient(520px 320px at 0% 0%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(125deg, #f5f2ed 0%, #f7f4ef 55%, #ffeadd 100%);
 }
 
 .agent-banner {
   background:
-    radial-gradient(420px 140px at 100% 50%, rgba(31, 165, 146, 0.32) 0%, rgba(31, 165, 146, 0) 70%),
-    #12233a;
+    radial-gradient(420px 140px at 100% 50%, rgba(255, 90, 31, 0.32) 0%, rgba(255, 90, 31, 0) 70%),
+    #1c1c21;
 }
 
 .scroll-thin::-webkit-scrollbar {
@@ -221,7 +226,7 @@
   height: 8px;
 }
 .scroll-thin::-webkit-scrollbar-thumb {
-  background: rgba(15, 28, 46, 0.16);
+  background: rgba(22, 22, 26, 0.16);
   border-radius: 999px;
 }
 
@@ -239,8 +244,8 @@
 }
 
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(31, 165, 146, 0.55); }
-  100% { box-shadow: 0 0 0 10px rgba(31, 165, 146, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(255, 90, 31, 0.55); }
+  100% { box-shadow: 0 0 0 10px rgba(255, 90, 31, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
