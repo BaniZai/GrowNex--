@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="zh-CN" className={`${jakarta.variable} ${noto.variable}`}>
+    <html lang="zh-CN" data-theme="volt" suppressHydrationWarning className={`${jakarta.variable} ${noto.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   )

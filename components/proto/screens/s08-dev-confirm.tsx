@@ -122,7 +122,7 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
               const isEdit = editing === i.id
               return (
                 <li key={i.id} className="relative flex gap-4 pb-5 last:pb-0">
-                  {!last && <span aria-hidden className="absolute bottom-0 left-[13px] top-7 w-0.5 bg-[#e6e1da]" />}
+                  {!last && <span aria-hidden className="absolute bottom-0 left-[13px] top-7 w-0.5 bg-line" />}
                   <span
                     className={cn(
                       'relative z-[1] grid size-7 shrink-0 place-items-center rounded-full border-2 text-xs font-semibold',
@@ -158,7 +158,7 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
                             if (e.key === 'Escape') setEditing(null)
                           }}
                           placeholder={i.hint}
-                          className="h-10 min-w-0 flex-1 rounded-xl border-2 border-[#ff5a1f] bg-white px-3 text-[13px] outline-none"
+                          className="h-10 min-w-0 flex-1 rounded-xl border-2 border-sun bg-white px-3 text-[13px] outline-none"
                         />
                         <Btn variant="primary" size="sm" className="h-10" onClick={() => save(i.id)}>保存</Btn>
                         <Btn variant="white" size="sm" className="h-10" onClick={() => setEditing(null)}>取消</Btn>
@@ -173,7 +173,7 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
               )
             })}
           </ol>
-          <footer className="flex items-center gap-2 border-t border-line bg-[#f7f5f2] px-6 py-3 text-xs text-ink-mute">
+          <footer className="flex items-center gap-2 border-t border-line bg-cream px-6 py-3 text-xs text-ink-mute">
             <Lock className="size-3.5 shrink-0" />
             需求、数据源、所选字段或口径发生实质变化时,确认自动失效。
           </footer>
@@ -200,7 +200,7 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
           ) : (
             <div className="flex flex-1 flex-col gap-4 p-6 pt-4">
               <PillTabs<TabId> label="交付内容" items={[...TABS]} value={tab} onChange={setTab} />
-              <div className="relative flex-1 rounded-2xl bg-[#1e1445] p-4">
+              <div className="relative flex-1 rounded-2xl bg-deep p-4">
                 <button
                   type="button"
                   onClick={() => {
@@ -212,7 +212,7 @@ GROUP  BY TRUNC(c.STAT_DT, 'MM'), c.BRANCH_NO;`,
                   <ClipboardCopy className="size-3.5" />
                   复制
                 </button>
-                <pre className="scroll-thin max-h-[360px] overflow-auto whitespace-pre-wrap pr-16 font-mono text-[12.5px] leading-6 text-[#e6e1da]">
+                <pre className="scroll-thin max-h-[360px] overflow-auto whitespace-pre-wrap pr-16 font-mono text-[12.5px] leading-6 text-white/80">
                   {content[tab]}
                 </pre>
               </div>

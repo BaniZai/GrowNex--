@@ -55,13 +55,13 @@ function NavPill({ item, active, onClick }: { item: NavItem; active: boolean; on
         active ? 'bg-ink text-white shadow-[0_8px_18px_-8px_rgba(23,23,26,0.7)]' : 'text-ink-soft hover:bg-white/80 hover:text-ink',
       )}
     >
-      <span className={cn('transition-transform duration-200', active ? 'text-sun' : 'group-hover:scale-110')}>{item.icon}</span>
+      <span className={cn('transition-transform duration-200', active ? 'text-glow' : 'group-hover:scale-110')}>{item.icon}</span>
       {item.label}
       {item.badge ? (
         <span
           className={cn(
             'grid h-[18px] min-w-[18px] place-items-center rounded-full px-1 text-[10px] font-bold tabular-nums',
-            active ? 'grad-fire text-ink' : 'bg-ink text-white',
+            active ? 'grad-fire' : 'bg-ink text-white',
           )}
         >
           {item.badge}
@@ -138,6 +138,47 @@ function RecentsMenu() {
   )
 }
 
+const THEMES = [
+  { id: 'volt', label: '电光紫', swatch: 'linear-gradient(135deg,#8b6bff,#3f7bff)' },
+  { id: 'forest', label: '森林绿', swatch: 'linear-gradient(135deg,#3fbf86,#0f6e57)' },
+  { id: 'sun', label: '活力橙', swatch: 'linear-gradient(135deg,#ff7a1a,#ff3d6e)' },
+] as const
+
+type ThemeId = (typeof THEMES)[number]['id']
+
+function ThemeSwitch() {
+  const [theme, setTheme] = useState<ThemeId>('volt')
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+  }, [theme])
+
+  return (
+    <div role="radiogroup" aria-label="配色主题" className="flex h-10 items-center gap-1 rounded-full bg-white/80 px-1.5">
+      {THEMES.map((t) => {
+        const on = theme === t.id
+        return (
+          <button
+            key={t.id}
+            type="button"
+            role="radio"
+            aria-checked={on}
+            aria-label={t.label}
+            title={t.label}
+            onClick={() => setTheme(t.id)}
+            className={cn(
+              'grid size-7 place-items-center rounded-full transition-all duration-200',
+              on ? 'bg-ink/10 ring-2 ring-ink' : 'hover:scale-110',
+            )}
+          >
+            <span className="size-4 rounded-full" style={{ background: t.swatch }} />
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 function TopBar() {
   const { screen, go } = useStore()
   return (
@@ -148,7 +189,7 @@ function TopBar() {
         aria-label="数源 GrowNex 首页"
         className="flex h-11 shrink-0 items-center gap-2.5 rounded-full border border-ink/70 bg-white/50 pl-1.5 pr-4 transition-colors hover:bg-white/90"
       >
-        <span className="grid size-8 place-items-center rounded-full bg-ink text-sun">
+        <span className="grid size-8 place-items-center rounded-full bg-ink text-glow">
           <Database className="size-4" />
         </span>
         <span className="text-[16px] font-semibold tracking-tight text-ink">数源 GrowNex</span>
@@ -172,6 +213,7 @@ function TopBar() {
           私有化模式
           <span className="size-1.5 rounded-full bg-[#25a56a]" />
         </div>
+        <ThemeSwitch />
         <RecentsMenu />
         <button
           type="button"
@@ -181,7 +223,7 @@ function TopBar() {
           <Bell className="size-[18px]" />
         </button>
         <span
-          className="grid size-10 place-items-center rounded-full bg-ink text-[13px] font-semibold text-sun"
+          className="grid size-10 place-items-center rounded-full bg-ink text-[13px] font-semibold text-glow"
           title="林 工 · 元数据治理"
         >
           林
@@ -220,7 +262,7 @@ function Switcher() {
               aria-current={s.id === screen ? 'page' : undefined}
               className={cn(
                 'grid size-9 place-items-center rounded-full text-[13px] font-semibold tabular-nums transition-colors',
-                s.id === screen ? 'bg-ink text-sun' : 'text-ink-soft hover:bg-brand-50',
+                s.id === screen ? 'bg-ink text-glow' : 'text-ink-soft hover:bg-brand-50',
               )}
             >
               {String(s.id).padStart(2, '0')}

@@ -99,13 +99,13 @@ export function DevFindScreen() {
                 <span
                   className={cn(
                     'inline-flex h-8 items-center gap-2 rounded-full px-3 text-xs font-medium',
-                    i < 2 ? 'bg-brand text-white' : i === 2 ? 'bg-brand-100 text-brand' : 'bg-[#efece7] text-ink-mute',
+                    i < 2 ? 'bg-brand text-white' : i === 2 ? 'bg-brand-100 text-brand' : 'bg-panel2 text-ink-mute',
                   )}
                 >
                   <span className="grid size-4 place-items-center rounded-full bg-white/25 text-[10px] font-semibold">{i + 1}</span>
                   {s}
                 </span>
-                {i < STEPS.length - 1 && <span className="h-px w-4 bg-[#d9d3ca]" aria-hidden />}
+                {i < STEPS.length - 1 && <span className="h-px w-4 bg-dash" aria-hidden />}
               </li>
             ))}
           </ol>
@@ -130,7 +130,7 @@ export function DevFindScreen() {
             <div className="flex flex-col gap-4 p-6 pt-4">
               <div>
                 <label htmlFor="goal" className="mb-2 block text-[13px] font-semibold">业务目标</label>
-                <div className="rounded-2xl border-2 border-[#ff5a1f] bg-white p-3 shadow-[0_0_0_4px_rgba(23,23,26,0.08)]">
+                <div className="rounded-2xl border-2 border-sun bg-white p-3 shadow-[0_0_0_4px_rgb(var(--ink-rgb)/0.08)]">
                   <textarea
                     id="goal"
                     value={goal}
@@ -225,7 +225,7 @@ export function DevFindScreen() {
                 ))}
               </ul>
             )}
-            <footer className="flex items-center gap-2 border-t border-line bg-[#f7f5f2] px-6 py-3 text-xs text-ink-mute">
+            <footer className="flex items-center gap-2 border-t border-line bg-cream px-6 py-3 text-xs text-ink-mute">
               <ShieldAlert className="size-3.5 shrink-0" />
               敏感字段不会被默认选中,也不会默认发送给模型。
             </footer>

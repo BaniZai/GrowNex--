@@ -106,11 +106,11 @@ export function DatasetsScreen() {
                       aria-checked={on}
                       disabled={busy}
                       onClick={() => setPicked(d.id)}
-                      className={`flex w-full items-center gap-4 px-6 py-4 text-left transition-colors disabled:opacity-60 ${on ? 'bg-brand-50' : 'hover:bg-[#f7f5f2]'}`}
+                      className={`flex w-full items-center gap-4 px-6 py-4 text-left transition-colors disabled:opacity-60 ${on ? 'bg-brand-50' : 'hover:bg-cream'}`}
                     >
                       <span
                         aria-hidden
-                        className={`grid size-[18px] shrink-0 place-items-center rounded-full border-2 ${on ? 'border-brand' : 'border-[#d3cdc4]'}`}
+                        className={`grid size-[18px] shrink-0 place-items-center rounded-full border-2 ${on ? 'border-brand' : 'border-dash'}`}
                       >
                         {on && <span className="size-2 rounded-full bg-brand" />}
                       </span>
@@ -147,11 +147,11 @@ export function DatasetsScreen() {
                   <p className="text-[15px] font-semibold">{cur.name}</p>
                   <p className="mt-0.5 break-all text-xs text-ink-mute">{cur.source}</p>
                   <dl className="mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-2xl bg-[#f2efea] px-4 py-3">
+                    <div className="rounded-2xl bg-panel px-4 py-3">
                       <dt className="text-xs text-ink-mute">表</dt>
                       <dd className="text-[22px] font-semibold tabular-nums leading-8">{cur.tables}</dd>
                     </div>
-                    <div className="rounded-2xl bg-[#f2efea] px-4 py-3">
+                    <div className="rounded-2xl bg-panel px-4 py-3">
                       <dt className="text-xs text-ink-mute">字段</dt>
                       <dd className="text-[22px] font-semibold tabular-nums leading-8">{cur.fields.toLocaleString()}</dd>
                     </div>
@@ -189,7 +189,7 @@ export function DatasetsScreen() {
         />
         {cur && (
           <div className="flex flex-col gap-4 px-7 py-5">
-            <div className="rounded-2xl bg-[#f2efea] p-4">
+            <div className="rounded-2xl bg-panel p-4">
               <p className="text-[15px] font-semibold">{cur.name}</p>
               <p className="mt-0.5 text-xs text-ink-mute">{cur.source} · 导入 {cur.time}</p>
               <p className="mt-2 text-[13px]">
@@ -206,12 +206,12 @@ export function DatasetsScreen() {
               </Notice>
             )}
             <label className="flex items-center gap-2 text-xs text-ink-mute">
-              <input type="checkbox" checked={willCancel} onChange={(e) => setWillCancel(e.target.checked)} className="size-3.5 accent-[#16161a]" />
+              <input type="checkbox" checked={willCancel} onChange={(e) => setWillCancel(e.target.checked)} className="size-3.5 accent-ink" />
               演示:提交前取消,验证整批回滚(AC-03)
             </label>
           </div>
         )}
-        <footer className="flex justify-end gap-3 border-t border-line bg-[#f7f5f2] px-7 py-4">
+        <footer className="flex justify-end gap-3 border-t border-line bg-cream px-7 py-4">
           <Btn variant="white" className="h-10 px-6" autoFocus onClick={() => setStage('idle')}>
             取消
           </Btn>
@@ -230,7 +230,7 @@ export function DatasetsScreen() {
             </h2>
             <p className="mt-1 text-[13px] text-ink-soft">{cur?.name}</p>
           </div>
-          <div className="w-full rounded-2xl bg-[#f2efea] p-4 text-left text-[13px] leading-5 text-ink-soft">
+          <div className="w-full rounded-2xl bg-panel p-4 text-left text-[13px] leading-5 text-ink-soft">
             <ProgressBar indeterminate label="删除进度" className="mb-3" />
             按一个事务提交。提交前取消或失败时<b className="text-ink">整批保留</b>;提交后不能撤销。期间不能生成、审核或导出此数据集。
           </div>

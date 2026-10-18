@@ -13,8 +13,8 @@ export type Tone = 'red' | 'amber' | 'purple' | 'gray' | 'green' | 'dark' | 'blu
 const toneMap: Record<Tone, { box: string; dot: string }> = {
   red: { box: 'bg-[#fde8ec] text-[#b4233a]', dot: 'bg-[#d93a52]' },
   amber: { box: 'bg-[#fff0c9] text-[#8a5a00]', dot: 'bg-[#e5a400]' },
-  purple: { box: 'bg-[#d9efec] text-[#0b4a46]', dot: 'bg-[#e8480c]' },
-  gray: { box: 'bg-[#efece7] text-[#5c5a57]', dot: 'bg-[#a9a69b]' },
+  purple: { box: 'bg-brand-50 text-brand-700', dot: 'bg-sun' },
+  gray: { box: 'bg-panel2 text-[#5c5a57]', dot: 'bg-[#a9a69b]' },
   green: { box: 'bg-[#dcf4e6] text-[#17704a]', dot: 'bg-[#25a56a]' },
   blue: { box: 'bg-[#e3effd] text-[#1e5aa8]', dot: 'bg-[#3b82d6]' },
   dark: { box: 'bg-ink text-white', dot: 'bg-white' },
@@ -51,7 +51,7 @@ export function FlagTag({ children, className }: { children: ReactNode; classNam
   return (
     <span
       className={cn(
-        'inline-flex h-6 shrink-0 items-center whitespace-nowrap rounded-full border border-dashed border-[#b9c6d1] bg-white/60 px-2.5 text-xs font-medium text-brand',
+        'inline-flex h-6 shrink-0 items-center whitespace-nowrap rounded-full border border-dashed border-dash bg-white/60 px-2.5 text-xs font-medium text-brand',
         className,
       )}
     >
@@ -105,7 +105,7 @@ const btnVariant: Record<BtnVariant, string> = {
   white: 'bg-white text-ink border border-line hover:bg-brand-50 active:scale-[0.98]',
   dark: 'bg-ink text-white hover:bg-brand-600 active:scale-[0.98]',
   danger: 'bg-[#d93a52] text-white hover:bg-[#c02d44] active:scale-[0.98]',
-  soft: 'grad-fire text-ink font-semibold shadow-[0_10px_20px_-10px_rgba(255,77,46,0.8)] hover:brightness-105 active:scale-[0.98]',
+  soft: 'grad-fire font-semibold shadow-accent hover:brightness-105 active:scale-[0.98]',
   ghost: 'text-ink-soft hover:bg-brand-50 hover:text-brand',
 }
 
@@ -219,7 +219,7 @@ export function AgentBanner({
 }) {
   return (
     <div className="agent-banner flex items-center gap-4 rounded-2xl px-5 py-4 text-white shadow-[0_14px_30px_-18px_rgba(23,23,26,0.9)]">
-      <div className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#8fe3d3] to-[#ff5a1f] text-deep">
+      <div className="grid size-9 shrink-0 place-items-center rounded-full grad-fire">
         {icon}
       </div>
       <div className="min-w-0 flex-1">
@@ -258,7 +258,7 @@ export function ProgressBar({
       aria-valuenow={indeterminate ? undefined : value}
       aria-valuemin={0}
       aria-valuemax={100}
-      className={cn('h-1.5 w-full overflow-hidden rounded-full bg-[#ebe7e1]', className)}
+      className={cn('h-1.5 w-full overflow-hidden rounded-full bg-panel2', className)}
     >
       {indeterminate ? (
         <div className={cn('h-full w-2/5 animate-[slide_1.4s_ease-in-out_infinite] rounded-full', color)} />
@@ -269,7 +269,7 @@ export function ProgressBar({
   )
 }
 
-/* ---------- Ring loader (中央动态加载) ---------- */
+/* ---------- Ring loader (中央动态加���) ---------- */
 export function RingLoader({ size = 56, className }: { size?: number; className?: string }) {
   return (
     <svg
@@ -281,11 +281,11 @@ export function RingLoader({ size = 56, className }: { size?: number; className?
     >
       <defs>
         <linearGradient id="ring-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#7fd8c8" />
-          <stop offset="100%" stopColor="#ff5a1f" />
+          <stop offset="0%" style={{ stopColor: "var(--accent-glow)" }} />
+          <stop offset="100%" style={{ stopColor: "var(--accent)" }} />
         </linearGradient>
       </defs>
-      <circle cx="25" cy="25" r="20" fill="none" stroke="#ebe7e1" strokeWidth="5" />
+      <circle cx="25" cy="25" r="20" fill="none" stroke="var(--panel2)" strokeWidth="5" />
       <circle
         cx="25"
         cy="25"
@@ -332,7 +332,7 @@ export function Checkbox({
         aria-hidden
         className={cn(
           'grid size-[18px] shrink-0 place-items-center rounded-md border transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand',
-          checked ? 'border-brand bg-brand text-white' : 'border-[#d3cdc4] bg-white',
+          checked ? 'border-brand bg-brand text-white' : 'border-dash bg-white',
         )}
       >
         {checked && <Check className="size-3" strokeWidth={3} />}
@@ -358,7 +358,7 @@ export function Segmented<T extends string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className="flex rounded-full bg-[#ece9e4] p-1 shadow-[inset_0_0_0_1px_rgba(23,23,26,0.06)]"
+      className="flex rounded-full bg-panel2 p-1 shadow-[inset_0_0_0_1px_rgb(var(--ink-rgb)/0.06)]"
     >
       {items.map((it) => {
         const active = it.id === value
@@ -411,7 +411,7 @@ export function Modal({
 
   if (!open || !root) return null
   return createPortal(
-    <div className="pointer-events-auto absolute inset-0 z-50 flex items-center justify-center bg-[#16161a]/25 p-6 backdrop-blur-[6px]">
+    <div className="pointer-events-auto absolute inset-0 z-50 flex items-center justify-center bg-ink/25 p-6 backdrop-blur-[6px]">
       <div
         role="dialog"
         aria-modal="true"
@@ -483,7 +483,7 @@ export function Toast({
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-24 left-1/2 z-[60] flex w-[min(92vw,460px)] -translate-x-1/2 items-center gap-3 rounded-2xl bg-[#16161a] px-4 py-3 text-white shadow-[0_20px_50px_-16px_rgba(23,23,26,0.8)] animate-in fade-in slide-in-from-bottom-2"
+      className="fixed bottom-24 left-1/2 z-[60] flex w-[min(92vw,460px)] -translate-x-1/2 items-center gap-3 rounded-2xl bg-ink px-4 py-3 text-white shadow-[0_20px_50px_-16px_rgba(23,23,26,0.8)] animate-in fade-in slide-in-from-bottom-2"
     >
       <div className="grid size-8 shrink-0 place-items-center rounded-full bg-white/10">
         {icon ?? <Check className="size-4" />}
@@ -543,7 +543,7 @@ export function Notice({
   className?: string
 }) {
   const map = {
-    purple: 'bg-brand-50 text-[#16161a]',
+    purple: 'bg-brand-50 text-ink',
     amber: 'bg-[#fff5d9] text-[#7a5200]',
     red: 'bg-[#fdecef] text-[#a31f35]',
     green: 'bg-[#e4f6ec] text-[#14623f]',

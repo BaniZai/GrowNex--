@@ -185,7 +185,7 @@ export function StandardsScreen() {
                 <Tag tone="purple" dot={false}>{KIND_LABEL[sel.kind]}</Tag>
                 <Tag tone={sel.checkTone}>{sel.check}</Tag>
               </div>
-              <div className="rounded-2xl bg-[#f2efea] p-4">
+              <div className="rounded-2xl bg-panel p-4">
                 <p className="text-xs text-ink-mute">业务规则</p>
                 <p className="mt-1 text-[14px] leading-6">{sel.rule}</p>
               </div>
@@ -215,7 +215,7 @@ export function StandardsScreen() {
         <div className="flex flex-col gap-4 px-7 py-5">
           <div className="overflow-hidden rounded-2xl border border-line">
             <table className="w-full text-left text-[13px]">
-              <thead className="bg-[#f2efea] text-ink-mute">
+              <thead className="bg-panel text-ink-mute">
                 <tr>
                   {['工作表', '识别类型', '有效', '新增', '重复', '无效', '中文冲突'].map((h) => (
                     <th key={h} scope="col" className="h-10 px-3 font-medium">{h}</th>
@@ -242,7 +242,7 @@ export function StandardsScreen() {
             重复导入<b>保留首次入库记录</b>,不会覆盖为更新版本。178 条重复已跳过。
           </Notice>
         </div>
-        <footer className="flex justify-end gap-3 border-t border-line bg-[#f7f5f2] px-7 py-4">
+        <footer className="flex justify-end gap-3 border-t border-line bg-cream px-7 py-4">
           <Btn variant="white" className="h-10 px-5" onClick={() => setImportOpen(false)}>关闭</Btn>
         </footer>
       </Modal>
