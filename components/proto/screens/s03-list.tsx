@@ -200,7 +200,7 @@ export function ListScreen() {
               {filtered.map((r) => {
                 const active = r.id === sel
                 const isEdit = editing === r.id
-                const base = active ? 'bg-brand-50' : r.kind === '表' ? 'bg-[#faf8ff]' : 'bg-white'
+                const base = active ? 'bg-brand-50' : r.kind === '表' ? 'bg-[#fbfaf5]' : 'bg-white'
                 return (
                   <div
                     key={r.id}
@@ -243,7 +243,7 @@ export function ListScreen() {
                       {r.scope ? <p className="truncate" title={r.scope}>{r.scope}</p> : <span className="text-ink-mute">未提供来源范围</span>}
                     </div>
                     <div role="cell" className="min-w-0 px-3">
-                      {r.orig ? <p className="truncate" title={r.orig}>{r.orig}</p> : <span className="rounded-md border border-dashed border-[#d9d2ee] px-1.5 py-0.5 text-xs text-ink-mute">原注释缺失</span>}
+                      {r.orig ? <p className="truncate" title={r.orig}>{r.orig}</p> : <span className="rounded-md border border-dashed border-[#e0dac6] px-1.5 py-0.5 text-xs text-ink-mute">原注释缺失</span>}
                     </div>
                     <div role="cell" className="min-w-0 px-3" onClick={(e) => isEdit && e.stopPropagation()}>
                       {isEdit ? (
@@ -285,7 +285,7 @@ export function ListScreen() {
                     </div>
                     <div role="cell" className="px-3">
                       {r.note ? (
-                        <span className="inline-flex items-center gap-1 text-xs font-medium text-[#8f5400]" title={r.note}>
+                        <span className="inline-flex items-center gap-1 text-xs font-medium text-[#9a4a00]" title={r.note}>
                           <TriangleAlert className="size-3.5" />
                           需关注
                         </span>
@@ -345,11 +345,11 @@ export function ListScreen() {
                 <Tag tone={cur.reviewed ? 'green' : 'amber'}>{cur.reviewed ? '已确认' : '待审核'}</Tag>
               </div>
 
-              <div className="rounded-2xl bg-[#f8f6fd] p-4">
+              <div className="rounded-2xl bg-[#f7f5ec] p-4">
                 <p className="text-xs text-ink-mute">建议注释</p>
                 <p className="mt-1 text-[15px] font-semibold leading-6">{cur.sugg || '未生成建议'}</p>
                 {cur.note && (
-                  <p className="mt-2 flex items-start gap-1.5 rounded-xl bg-[#fff6dc] px-3 py-2 text-xs leading-5 text-[#7a4a00]">
+                  <p className="mt-2 flex items-start gap-1.5 rounded-xl bg-[#ffeee0] px-3 py-2 text-xs leading-5 text-[#8a3f00]">
                     <TriangleAlert className="mt-0.5 size-3.5 shrink-0" />
                     {cur.note}
                   </p>

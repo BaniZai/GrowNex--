@@ -165,16 +165,20 @@
 @theme inline {
   --font-sans: var(--font-jakarta), var(--font-noto), 'Microsoft YaHei', 'PingFang SC', system-ui, sans-serif;
   --font-mono: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
-  --color-ink: #1c1240;
-  --color-ink-soft: #5b5675;
-  --color-ink-mute: #8d88a6;
-  --color-brand: #6d3fd8;
-  --color-brand-600: #5b2fc4;
-  --color-brand-50: #f3effd;
-  --color-brand-100: #ebe5fb;
-  --color-line: #e9e5f4;
-  --color-deep: #2a1670;
-  --shadow-card: 0 1px 2px rgba(60, 30, 120, 0.04), 0 8px 24px -12px rgba(60, 30, 120, 0.14);
+  --color-ink: #17171a;
+  --color-ink-soft: #5c5b57;
+  --color-ink-mute: #8a8880;
+  --color-brand: #17171a;
+  --color-brand-600: #2e2e33;
+  --color-brand-50: #fbf4d3;
+  --color-brand-100: #f7e9a8;
+  --color-sun: #f5c93b;
+  --color-sun-600: #e5b52a;
+  --color-cream: #fbfaf5;
+  --color-line: #ebe8dc;
+  --color-deep: #1d1d20;
+  --shadow-card: 0 1px 2px rgba(23, 23, 26, 0.04), 0 16px 34px -20px rgba(23, 23, 26, 0.22);
+  --shadow-lift: 0 1px 2px rgba(23, 23, 26, 0.05), 0 22px 40px -18px rgba(23, 23, 26, 0.3);
 }
 
 @layer base {
@@ -188,28 +192,28 @@
     cursor: pointer;
   }
   :focus-visible {
-    outline: 2px solid #6d3fd8;
+    outline: 2px solid #17171a;
     outline-offset: 2px;
   }
 }
 
 .stage-bg {
   background:
-    radial-gradient(1200px 700px at 8% 0%, #8a63e6 0%, rgba(138, 99, 230, 0) 60%),
-    radial-gradient(1000px 700px at 100% 40%, #ee9be6 0%, rgba(238, 155, 230, 0) 60%),
-    linear-gradient(160deg, #9a74ea 0%, #e99ae4 50%, #f8eaa0 100%);
+    radial-gradient(900px 520px at 12% 0%, #c7cad4 0%, rgba(199, 202, 212, 0) 65%),
+    radial-gradient(900px 600px at 100% 100%, #b7bac6 0%, rgba(183, 186, 198, 0) 60%),
+    #a9adba;
 }
 
-.sidebar-bg {
-  background: linear-gradient(180deg, #43249f 0%, #321a86 45%, #2a1670 100%);
-}
-
-.main-bg {
-  background: linear-gradient(180deg, #f1edfb 0%, #f8f6fd 40%, #fbfaff 100%);
+.frame-bg {
+  background:
+    radial-gradient(700px 420px at 100% 100%, rgba(251, 214, 92, 0.75) 0%, rgba(251, 214, 92, 0) 70%),
+    linear-gradient(125deg, #e2e3e8 0%, #ebeae3 42%, #f6edc4 80%, #fbe58c 100%);
 }
 
 .agent-banner {
-  background: linear-gradient(95deg, #231058 0%, #36197f 55%, #5a34b5 100%);
+  background:
+    radial-gradient(420px 140px at 100% 50%, rgba(245, 201, 59, 0.32) 0%, rgba(245, 201, 59, 0) 70%),
+    #1d1d20;
 }
 
 .scroll-thin::-webkit-scrollbar {
@@ -217,8 +221,16 @@
   height: 8px;
 }
 .scroll-thin::-webkit-scrollbar-thumb {
-  background: #d9d2ee;
+  background: rgba(23, 23, 26, 0.16);
   border-radius: 999px;
+}
+
+.lift {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+.lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
 }
 
 @keyframes slide {
@@ -227,6 +239,11 @@
 }
 
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(109, 63, 216, 0.35); }
-  100% { box-shadow: 0 0 0 10px rgba(109, 63, 216, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(245, 201, 59, 0.55); }
+  100% { box-shadow: 0 0 0 10px rgba(245, 201, 59, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lift { transition: none; }
+  .lift:hover { transform: none; }
 }

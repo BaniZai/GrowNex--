@@ -76,7 +76,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const read = () => {
-      const n = Number(window.location.hash.replace('#', ''))
+      const n = Number(window.location.hash.replace('#screen-', ''))
       if (n >= 1 && n <= 10) setScreen(n as ScreenId)
     }
     read()
@@ -86,7 +86,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const go = useCallback((s: ScreenId) => {
     setScreen(s)
-    window.history.replaceState(null, '', `#${s}`)
+    window.history.replaceState(null, '', `#screen-${s}`)
   }, [])
 
   const [datasets, setDatasets] = useState<Dataset[]>(INITIAL_DATASETS)

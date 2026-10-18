@@ -163,8 +163,8 @@ export function ImportScreen() {
               right={<FlagTag>PDF / OCR · 待接入</FlagTag>}
             />
             <div className="p-6 pt-4">
-              <div className="flex items-center gap-5 rounded-2xl border-2 border-dashed border-[#cdbff0] bg-[#faf8ff] px-6 py-6">
-                <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-white text-brand shadow-[0_6px_16px_-8px_rgba(109,63,216,0.5)]">
+              <div className="flex items-center gap-5 rounded-2xl border-2 border-dashed border-[#d9d3bd] bg-[#fbfaf5] px-6 py-6">
+                <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-white text-brand shadow-[0_6px_16px_-8px_rgba(23,23,26,0.5)]">
                   <UploadCloud className="size-6" />
                 </span>
                 <div className="min-w-0 flex-1">
@@ -276,7 +276,7 @@ export function ImportScreen() {
                 { k: '跳过记录', v: phase === 'done' || phase === 'partial' ? '3' : '—' },
                 { k: '失败文件', v: phase === 'done' || phase === 'partial' ? '1' : '—' },
               ].map((x) => (
-                <div key={x.k} className="rounded-2xl bg-[#f8f6fd] px-4 py-3">
+                <div key={x.k} className="rounded-2xl bg-[#f7f5ec] px-4 py-3">
                   <dt className="text-xs text-ink-mute">{x.k}</dt>
                   <dd className="mt-0.5 text-[22px] font-semibold tabular-nums leading-8">{x.v}</dd>
                 </div>
@@ -299,7 +299,7 @@ export function ImportScreen() {
                 ['PDF / 扫描件', '当前不支持,请转为 XLSX / CSV'],
               ].map(([k, v]) => (
                 <li key={k} className="flex gap-3">
-                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#f0a31a]" />
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#f08a1a]" />
                   <p className="leading-5">
                     <b className="font-semibold">{k}</b>
                     <span className="block text-xs text-ink-soft">{v}</span>
@@ -337,7 +337,7 @@ export function ImportScreen() {
               {phase === 'cancelling' ? '请稍候,不要重复提交' : '信贷_数据字典.csv · 解析字段定义'}
             </p>
           </div>
-          <div className="w-full rounded-2xl bg-[#f8f6fd] p-4 text-left text-[13px]">
+          <div className="w-full rounded-2xl bg-[#f7f5ec] p-4 text-left text-[13px]">
             {phase === 'cancelling' ? (
               <p className="leading-5 text-ink-soft">
                 正在提交最后一批。<b className="text-ink">已提交的数据会保留</b>,数据集将标记为不完整,之后可查看或删除。

@@ -12,9 +12,9 @@ export type Tone = 'red' | 'amber' | 'purple' | 'gray' | 'green' | 'dark' | 'blu
 
 const toneMap: Record<Tone, { box: string; dot: string }> = {
   red: { box: 'bg-[#fde8ec] text-[#b4233a]', dot: 'bg-[#d93a52]' },
-  amber: { box: 'bg-[#fdf1c8] text-[#8f5400]', dot: 'bg-[#f0a31a]' },
-  purple: { box: 'bg-[#ece6fb] text-[#5b2fc4]', dot: 'bg-[#6d3fd8]' },
-  gray: { box: 'bg-[#f1eff7] text-[#625d7c]', dot: 'bg-[#a39fb8]' },
+  amber: { box: 'bg-[#ffe9d6] text-[#9a4a00]', dot: 'bg-[#f08a1a]' },
+  purple: { box: 'bg-[#fdf0b8] text-[#4d3b00]', dot: 'bg-[#e5b52a]' },
+  gray: { box: 'bg-[#f1efe8] text-[#5c5b57]', dot: 'bg-[#a9a69b]' },
   green: { box: 'bg-[#dcf4e6] text-[#17704a]', dot: 'bg-[#25a56a]' },
   blue: { box: 'bg-[#e3effd] text-[#1e5aa8]', dot: 'bg-[#3b82d6]' },
   dark: { box: 'bg-ink text-white', dot: 'bg-white' },
@@ -51,7 +51,7 @@ export function FlagTag({ children, className }: { children: ReactNode; classNam
   return (
     <span
       className={cn(
-        'inline-flex h-6 shrink-0 items-center whitespace-nowrap rounded-full border border-dashed border-[#b9a6ee] bg-white/60 px-2.5 text-xs font-medium text-brand',
+        'inline-flex h-6 shrink-0 items-center whitespace-nowrap rounded-full border border-dashed border-[#cfc8aa] bg-white/60 px-2.5 text-xs font-medium text-brand',
         className,
       )}
     >
@@ -71,7 +71,7 @@ export function Card({
   as?: 'section' | 'div' | 'article'
 }) {
   return (
-    <As className={cn('rounded-3xl border border-white bg-white shadow-card', className)}>{children}</As>
+    <As className={cn('rounded-[28px] border border-white/80 bg-white/90 shadow-card', className)}>{children}</As>
   )
 }
 
@@ -101,11 +101,11 @@ export function CardHeader({
 type BtnVariant = 'primary' | 'white' | 'dark' | 'danger' | 'soft' | 'ghost'
 
 const btnVariant: Record<BtnVariant, string> = {
-  primary: 'bg-brand text-white hover:bg-brand-600 shadow-[0_6px_16px_-8px_rgba(109,63,216,0.8)]',
-  white: 'bg-white text-ink border border-line hover:bg-brand-50',
-  dark: 'bg-ink text-white hover:bg-[#2b1c5c]',
-  danger: 'bg-[#d93a52] text-white hover:bg-[#c02d44]',
-  soft: 'bg-brand-50 text-brand hover:bg-brand-100',
+  primary: 'bg-ink text-white hover:bg-brand-600 shadow-[0_8px_18px_-8px_rgba(23,23,26,0.7)] active:scale-[0.98]',
+  white: 'bg-white text-ink border border-line hover:bg-brand-50 active:scale-[0.98]',
+  dark: 'bg-ink text-white hover:bg-brand-600 active:scale-[0.98]',
+  danger: 'bg-[#d93a52] text-white hover:bg-[#c02d44] active:scale-[0.98]',
+  soft: 'bg-sun text-ink hover:bg-sun-600 active:scale-[0.98]',
   ghost: 'text-ink-soft hover:bg-brand-50 hover:text-brand',
 }
 
@@ -195,7 +195,7 @@ export function PageHeader({
       <div className="min-w-0">
         {crumb && <div className="mb-1 text-[13px] text-ink-mute">{crumb}</div>}
         <div className="flex flex-wrap items-center gap-3">
-          <h1 className="text-balance text-[28px] font-semibold leading-9 tracking-tight text-ink">{title}</h1>
+          <h1 className="text-balance text-[34px] font-normal leading-10 tracking-tight text-ink">{title}</h1>
           {badge}
         </div>
         {subtitle && <p className="mt-1 text-[13px] leading-5 text-ink-soft">{subtitle}</p>}
@@ -218,8 +218,8 @@ export function AgentBanner({
   icon: ReactNode
 }) {
   return (
-    <div className="agent-banner flex items-center gap-4 rounded-2xl px-5 py-4 text-white shadow-[0_14px_30px_-18px_rgba(42,22,112,0.9)]">
-      <div className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#f4c6f0] to-[#a98af0] text-deep">
+    <div className="agent-banner flex items-center gap-4 rounded-2xl px-5 py-4 text-white shadow-[0_14px_30px_-18px_rgba(23,23,26,0.9)]">
+      <div className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#fbe39a] to-[#f5c93b] text-deep">
         {icon}
       </div>
       <div className="min-w-0 flex-1">
@@ -246,9 +246,9 @@ export function ProgressBar({
   className?: string
 }) {
   const color = {
-    purple: 'bg-brand',
+    purple: 'bg-ink',
     red: 'bg-[#d93a52]',
-    amber: 'bg-[#f0a31a]',
+    amber: 'bg-[#f08a1a]',
     green: 'bg-[#25a56a]',
   }[tone]
   return (
@@ -258,7 +258,7 @@ export function ProgressBar({
       aria-valuenow={indeterminate ? undefined : value}
       aria-valuemin={0}
       aria-valuemax={100}
-      className={cn('h-1.5 w-full overflow-hidden rounded-full bg-[#ece8f6]', className)}
+      className={cn('h-1.5 w-full overflow-hidden rounded-full bg-[#ebe7da]', className)}
     >
       {indeterminate ? (
         <div className={cn('h-full w-2/5 animate-[slide_1.4s_ease-in-out_infinite] rounded-full', color)} />
@@ -281,11 +281,11 @@ export function RingLoader({ size = 56, className }: { size?: number; className?
     >
       <defs>
         <linearGradient id="ring-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#ee9be6" />
-          <stop offset="100%" stopColor="#6d3fd8" />
+          <stop offset="0%" stopColor="#f9e08a" />
+          <stop offset="100%" stopColor="#f5c93b" />
         </linearGradient>
       </defs>
-      <circle cx="25" cy="25" r="20" fill="none" stroke="#ece8f6" strokeWidth="5" />
+      <circle cx="25" cy="25" r="20" fill="none" stroke="#ebe7da" strokeWidth="5" />
       <circle
         cx="25"
         cy="25"
@@ -332,7 +332,7 @@ export function Checkbox({
         aria-hidden
         className={cn(
           'grid size-[18px] shrink-0 place-items-center rounded-md border transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand',
-          checked ? 'border-brand bg-brand text-white' : 'border-[#cfc7e6] bg-white',
+          checked ? 'border-brand bg-brand text-white' : 'border-[#d4cfbb] bg-white',
         )}
       >
         {checked && <Check className="size-3" strokeWidth={3} />}
@@ -358,7 +358,7 @@ export function Segmented<T extends string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className="flex rounded-full bg-[#f1edfa] p-1 shadow-[inset_0_0_0_1px_rgba(109,63,216,0.06)]"
+      className="flex rounded-full bg-[#f4f1e6] p-1 shadow-[inset_0_0_0_1px_rgba(23,23,26,0.06)]"
     >
       {items.map((it) => {
         const active = it.id === value
@@ -371,7 +371,7 @@ export function Segmented<T extends string>({
             onClick={() => onChange(it.id)}
             className={cn(
               'flex h-9 flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 text-[13px] font-medium transition-all',
-              active ? 'bg-white text-ink shadow-[0_2px_8px_-2px_rgba(60,30,120,0.2)]' : 'text-ink-soft hover:text-ink',
+              active ? 'bg-white text-ink shadow-[0_2px_8px_-2px_rgba(23,23,26,0.2)]' : 'text-ink-soft hover:text-ink',
             )}
           >
             {it.label}
@@ -411,13 +411,13 @@ export function Modal({
 
   if (!open || !root) return null
   return createPortal(
-    <div className="pointer-events-auto absolute inset-0 z-50 flex items-center justify-center bg-[#2a1670]/25 p-6 backdrop-blur-[6px]">
+    <div className="pointer-events-auto absolute inset-0 z-50 flex items-center justify-center bg-[#17171a]/25 p-6 backdrop-blur-[6px]">
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         className={cn(
-          'max-h-full w-full overflow-y-auto rounded-[28px] border border-white bg-white shadow-[0_30px_80px_-20px_rgba(42,22,112,0.5)]',
+          'max-h-full w-full overflow-y-auto rounded-[28px] border border-white bg-white shadow-[0_30px_80px_-20px_rgba(23,23,26,0.5)]',
           width,
         )}
       >
@@ -483,7 +483,7 @@ export function Toast({
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-24 left-1/2 z-[60] flex w-[min(92vw,460px)] -translate-x-1/2 items-center gap-3 rounded-2xl bg-[#241160] px-4 py-3 text-white shadow-[0_20px_50px_-16px_rgba(36,17,96,0.8)] animate-in fade-in slide-in-from-bottom-2"
+      className="fixed bottom-24 left-1/2 z-[60] flex w-[min(92vw,460px)] -translate-x-1/2 items-center gap-3 rounded-2xl bg-[#17171a] px-4 py-3 text-white shadow-[0_20px_50px_-16px_rgba(23,23,26,0.8)] animate-in fade-in slide-in-from-bottom-2"
     >
       <div className="grid size-8 shrink-0 place-items-center rounded-full bg-white/10">
         {icon ?? <Check className="size-4" />}
@@ -509,7 +509,7 @@ export function SectionLabel({ children, className }: { children: ReactNode; cla
 }
 
 export function KV({ k, v, tone }: { k: string; v: ReactNode; tone?: 'green' | 'red' | 'amber' }) {
-  const color = tone === 'green' ? 'text-[#17704a]' : tone === 'red' ? 'text-[#b4233a]' : tone === 'amber' ? 'text-[#8f5400]' : 'text-ink'
+  const color = tone === 'green' ? 'text-[#17704a]' : tone === 'red' ? 'text-[#b4233a]' : tone === 'amber' ? 'text-[#9a4a00]' : 'text-ink'
   return (
     <div className="flex items-center justify-between gap-4 border-b border-line py-2.5 text-[13px] last:border-b-0">
       <dt className="text-ink-soft">{k}</dt>
@@ -543,8 +543,8 @@ export function Notice({
   className?: string
 }) {
   const map = {
-    purple: 'bg-brand-50 text-[#43249f]',
-    amber: 'bg-[#fff6dc] text-[#7a4a00]',
+    purple: 'bg-brand-50 text-[#17171a]',
+    amber: 'bg-[#ffeee0] text-[#8a3f00]',
     red: 'bg-[#fdecef] text-[#a31f35]',
     green: 'bg-[#e4f6ec] text-[#14623f]',
   }

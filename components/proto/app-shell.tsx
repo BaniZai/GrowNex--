@@ -1,22 +1,22 @@
 'use client'
 
-import { useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import {
+  Bell,
   BookMarked,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
+  Clock3,
   Code2,
   Database,
   FileText,
   LayoutGrid,
   Settings2,
   ShieldCheck,
-  Sparkles,
   WifiOff,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { ModalRootContext, Tag } from './ui'
+import { ModalRootContext } from './ui'
 import { SCREENS, useStore, type ScreenId } from './store'
 
 type NavItem = {
@@ -27,41 +27,43 @@ type NavItem = {
   badge?: number
 }
 
-const WORK_NAV: NavItem[] = [
-  { label: '任务工作台', icon: <LayoutGrid className="size-[18px]" />, target: 1, match: [1] },
-  { label: '元数据治理', icon: <ShieldCheck className="size-[18px]" />, target: 3, match: [2, 3, 4, 5], badge: 2 },
-  { label: '数据开发', icon: <Code2 className="size-[18px]" />, target: 7, match: [7, 8], badge: 1 },
-  { label: '制度通知解读', icon: <FileText className="size-[18px]" />, target: 9, match: [9] },
-]
-
-const CONFIG_NAV: NavItem[] = [
-  { label: '标准库', icon: <BookMarked className="size-[18px]" />, target: 6, match: [6] },
-  { label: '模型设置', icon: <Settings2 className="size-[18px]" />, target: 10, match: [10] },
+const NAV: NavItem[] = [
+  { label: '任务工作台', icon: <LayoutGrid className="size-4" />, target: 1, match: [1] },
+  { label: '元数据治理', icon: <ShieldCheck className="size-4" />, target: 3, match: [2, 3, 4, 5], badge: 2 },
+  { label: '数据开发', icon: <Code2 className="size-4" />, target: 7, match: [7, 8], badge: 1 },
+  { label: '制度解读', icon: <FileText className="size-4" />, target: 9, match: [9] },
+  { label: '标准库', icon: <BookMarked className="size-4" />, target: 6, match: [6] },
+  { label: '模型设置', icon: <Settings2 className="size-4" />, target: 10, match: [10] },
 ]
 
 const statusDot: Record<string, string> = {
-  review: 'bg-[#f0a31a]',
-  confirm: 'bg-[#f0a31a]',
+  review: 'bg-[#f08a1a]',
+  confirm: 'bg-[#f08a1a]',
   done: 'bg-[#25a56a]',
-  running: 'bg-[#a98af0]',
+  running: 'bg-sun',
   failed: 'bg-[#e8657a]',
 }
 
-function NavButton({ item, active, onClick }: { item: NavItem; active: boolean; onClick: () => void }) {
+function NavPill({ item, active, onClick }: { item: NavItem; active: boolean; onClick: () => void }) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-current={active ? 'page' : undefined}
       className={cn(
-        'flex h-10 w-full items-center gap-3 rounded-xl px-3 text-[14px] font-medium transition-colors',
-        active ? 'bg-white/14 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.14)]' : 'text-white/72 hover:bg-white/8 hover:text-white',
+        'relative inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-[13px] font-medium transition-all duration-200',
+        active ? 'bg-ink text-white shadow-[0_8px_18px_-8px_rgba(23,23,26,0.7)]' : 'text-ink-soft hover:bg-white/80 hover:text-ink',
       )}
     >
-      <span className={cn(active ? 'text-white' : 'text-white/60')}>{item.icon}</span>
-      <span className="flex-1 truncate text-left">{item.label}</span>
+      <span className={cn('transition-transform duration-200', active ? 'text-sun' : 'group-hover:scale-110')}>{item.icon}</span>
+      {item.label}
       {item.badge ? (
-        <span className="grid h-5 min-w-5 place-items-center rounded-full bg-[#fbd6f3] px-1.5 text-[11px] font-semibold text-deep">
+        <span
+          className={cn(
+            'grid h-[18px] min-w-[18px] place-items-center rounded-full px-1 text-[10px] font-bold tabular-nums',
+            active ? 'bg-sun text-ink' : 'bg-ink text-white',
+          )}
+        >
           {item.badge}
         </span>
       ) : null}
@@ -69,82 +71,123 @@ function NavButton({ item, active, onClick }: { item: NavItem; active: boolean; 
   )
 }
 
-function Sidebar() {
-  const { screen, go, recents } = useStore()
+function RecentsMenu() {
+  const { go, recents } = useStore()
+  const [open, setOpen] = useState(false)
+  const box = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onDown = (e: MouseEvent) => {
+      if (!box.current?.contains(e.target as Node)) setOpen(false)
+    }
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    document.addEventListener('mousedown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
   return (
-    <aside className="sidebar-bg flex w-[236px] shrink-0 flex-col gap-5 px-4 pb-4 pt-4 text-white" aria-label="主导航">
+    <div ref={box} className="relative">
       <button
         type="button"
-        className="flex items-center gap-3 rounded-2xl bg-white/10 p-2.5 text-left shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]"
-        aria-label="工作区:数源本机工作区"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-haspopup="menu"
+        aria-label="最近任务"
+        className="relative grid size-10 place-items-center rounded-full bg-white/80 text-ink shadow-[inset_0_0_0_1px_rgba(255,255,255,0.9)] transition-colors hover:bg-white"
       >
-        <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#f4c6f0] via-[#b79af2] to-[#6d3fd8]">
-          <Database className="size-[18px] text-white" />
+        <Clock3 className="size-[18px]" />
+        {recents.length > 0 && <span className="absolute right-2.5 top-2.5 size-2 rounded-full bg-sun ring-2 ring-white" />}
+      </button>
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 top-12 z-30 w-[280px] rounded-3xl border border-white bg-white p-2 shadow-lift animate-in fade-in slide-in-from-top-1"
+        >
+          <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-mute">最近任务</p>
+          {recents.length === 0 ? (
+            <p className="px-3 pb-3 text-xs leading-5 text-ink-mute">暂无最近任务</p>
+          ) : (
+            <ul>
+              {recents.slice(0, 5).map((r) => (
+                <li key={r.id}>
+                  <button
+                    type="button"
+                    role="menuitem"
+                    onClick={() => {
+                      setOpen(false)
+                      go(1)
+                    }}
+                    title={r.title}
+                    className="flex h-10 w-full items-center gap-2.5 rounded-2xl px-3 text-left text-[13px] text-ink hover:bg-brand-50"
+                  >
+                    <span aria-hidden className={cn('size-2 shrink-0 rounded-full', statusDot[r.status])} />
+                    <span className="min-w-0 flex-1 truncate">{r.title}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function TopBar() {
+  const { screen, go } = useStore()
+  return (
+    <header className="flex shrink-0 items-center gap-4 px-7 pb-2 pt-6">
+      <button
+        type="button"
+        onClick={() => go(1)}
+        aria-label="数源 GrowNex 首页"
+        className="flex h-11 shrink-0 items-center gap-2.5 rounded-full border border-ink/70 bg-white/50 pl-1.5 pr-4 transition-colors hover:bg-white/90"
+      >
+        <span className="grid size-8 place-items-center rounded-full bg-ink text-sun">
+          <Database className="size-4" />
         </span>
-        <span className="min-w-0 flex-1">
-          <span className="block truncate text-[14px] font-semibold leading-5">数源 GrowNex</span>
-          <span className="block truncate text-[11px] text-white/55">本机工作区 · 离线可用</span>
-        </span>
-        <ChevronDown className="size-4 text-white/60" />
+        <span className="text-[16px] font-semibold tracking-tight text-ink">数源 GrowNex</span>
       </button>
 
-      <nav className="flex flex-col gap-1">
-        <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45">任务类型</p>
-        {WORK_NAV.map((it) => (
-          <NavButton key={it.label} item={it} active={it.match.includes(screen)} onClick={() => go(it.target)} />
+      <nav
+        aria-label="主导航"
+        className="scroll-thin mx-auto flex min-w-0 items-center gap-0.5 overflow-x-auto rounded-full bg-white/55 p-1 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.85)] backdrop-blur"
+      >
+        {NAV.map((it) => (
+          <NavPill key={it.label} item={it} active={it.match.includes(screen)} onClick={() => go(it.target)} />
         ))}
       </nav>
 
-      <nav className="flex flex-col gap-1">
-        <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45">资料与配置</p>
-        {CONFIG_NAV.map((it) => (
-          <NavButton key={it.label} item={it} active={it.match.includes(screen)} onClick={() => go(it.target)} />
-        ))}
-      </nav>
-
-      <div className="flex min-h-0 flex-1 flex-col gap-1">
-        <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45">最近任务</p>
-        {recents.length === 0 ? (
-          <p className="px-3 text-xs leading-5 text-white/50">暂无最近任务</p>
-        ) : (
-          <ul className="flex flex-col gap-0.5 overflow-hidden">
-            {recents.slice(0, 4).map((r) => (
-              <li key={r.id}>
-                <button
-                  type="button"
-                  onClick={() => go(1)}
-                  title={r.title}
-                  className="flex h-9 w-full items-center gap-2.5 rounded-lg px-3 text-left text-[13px] text-white/75 hover:bg-white/8 hover:text-white"
-                >
-                  <span aria-hidden className={cn('size-2 shrink-0 rounded-full', statusDot[r.status])} />
-                  <span className="min-w-0 flex-1 truncate">{r.title}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      <div className="rounded-2xl bg-white/10 p-3 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]">
-        <div className="flex items-center gap-2 text-[13px] font-medium">
-          <WifiOff className="size-4 text-[#d7c6ff]" />
+      <div className="flex shrink-0 items-center gap-2">
+        <div
+          className="hidden h-10 items-center gap-2 rounded-full bg-white/80 px-3.5 text-[12px] font-medium text-ink xl:flex"
+          title="资料仅在本机处理,不上传云端"
+        >
+          <WifiOff className="size-3.5 text-ink-soft" />
           私有化模式
+          <span className="size-1.5 rounded-full bg-[#25a56a]" />
         </div>
-        <p className="mt-1 flex items-center gap-1.5 text-[11px] leading-4 text-white/60">
-          <span className="size-1.5 rounded-full bg-[#7be0a8]" />
-          资料仅在本机处理,不上传云端
-        </p>
-        <div className="mt-3 flex items-center gap-2.5 border-t border-white/10 pt-3">
-          <span className="grid size-8 place-items-center rounded-full bg-gradient-to-br from-[#f4c6f0] to-[#8a63e6] text-xs font-semibold text-deep">
-            林
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-[13px] font-medium leading-4">林 工</p>
-            <p className="truncate text-[11px] text-white/55">元数据治理</p>
-          </div>
-        </div>
+        <RecentsMenu />
+        <button
+          type="button"
+          aria-label="通知"
+          className="relative grid size-10 place-items-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white"
+        >
+          <Bell className="size-[18px]" />
+        </button>
+        <span
+          className="grid size-10 place-items-center rounded-full bg-ink text-[13px] font-semibold text-sun"
+          title="林 工 · 元数据治理"
+        >
+          林
+        </span>
       </div>
-    </aside>
+    </header>
   )
 }
 
@@ -156,7 +199,7 @@ function Switcher() {
   return (
     <nav
       aria-label="原型页面切换"
-      className="fixed bottom-4 left-1/2 z-40 flex max-w-[calc(100vw-24px)] -translate-x-1/2 items-center gap-2 rounded-full border border-white/70 bg-white/85 p-1.5 shadow-[0_16px_40px_-14px_rgba(42,22,112,0.55)] backdrop-blur-xl"
+      className="fixed bottom-4 left-1/2 z-40 flex max-w-[calc(100vw-24px)] -translate-x-1/2 items-center gap-2 rounded-full border border-white/70 bg-white/85 p-1.5 shadow-[0_16px_40px_-14px_rgba(23,23,26,0.45)] backdrop-blur-xl"
     >
       <button
         type="button"
@@ -177,7 +220,7 @@ function Switcher() {
               aria-current={s.id === screen ? 'page' : undefined}
               className={cn(
                 'grid size-9 place-items-center rounded-full text-[13px] font-semibold tabular-nums transition-colors',
-                s.id === screen ? 'bg-ink text-white' : 'text-ink-soft hover:bg-brand-50',
+                s.id === screen ? 'bg-ink text-sun' : 'text-ink-soft hover:bg-brand-50',
               )}
             >
               {String(s.id).padStart(2, '0')}
@@ -203,22 +246,32 @@ function Switcher() {
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [root, setRoot] = useState<HTMLElement | null>(null)
+  const { screen } = useStore()
+  const scroller = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    scroller.current?.scrollTo({ top: 0 })
+  }, [screen])
+
   return (
     <div className="stage-bg min-h-svh overflow-x-auto p-4 pb-[88px] md:p-6 md:pb-[96px]">
-      <div className="mx-auto flex h-[calc(100svh-136px)] min-h-[640px] min-w-[1080px] max-w-[1560px] overflow-hidden rounded-[34px] border-[3px] border-white/90 bg-white shadow-[0_40px_90px_-30px_rgba(42,22,112,0.6)]">
-        <Sidebar />
-        <div ref={setRoot} className="main-bg relative min-w-0 flex-1">
-          <ModalRootContext.Provider value={root}>
-            <main id="main" className="scroll-thin h-full overflow-y-auto px-8 pb-10 pt-8">
-              {children}
-            </main>
-          </ModalRootContext.Provider>
-        </div>
+      <div
+        ref={setRoot}
+        className="frame-bg relative mx-auto flex h-[calc(100svh-136px)] min-h-[640px] min-w-[1040px] max-w-[1560px] flex-col overflow-hidden rounded-[40px] border border-white/70 shadow-[0_40px_90px_-30px_rgba(23,23,26,0.55)]"
+      >
+        <ModalRootContext.Provider value={root}>
+          <TopBar />
+          <main
+            id="main"
+            ref={scroller}
+            key={screen}
+            className="scroll-thin min-h-0 flex-1 overflow-y-auto px-7 pb-10 pt-4 animate-in fade-in slide-in-from-bottom-1 duration-300"
+          >
+            {children}
+          </main>
+        </ModalRootContext.Provider>
       </div>
       <Switcher />
-      <p className="sr-only">
-        <Sparkles /> <Tag>原型</Tag>
-      </p>
     </div>
   )
 }
